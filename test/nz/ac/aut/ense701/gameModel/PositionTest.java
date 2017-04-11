@@ -1,5 +1,8 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
+import nz.ac.aut.ense701.gameModel.Map.Position;
+import nz.ac.aut.ense701.gameModel.Map.Island;
 import org.junit.Test;
 
 /**

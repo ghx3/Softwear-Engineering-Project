@@ -1,5 +1,15 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.Entity.Food;
+import nz.ac.aut.ense701.gameModel.Entity.Tool;
+import nz.ac.aut.ense701.gameModel.Entity.Hazard;
+import nz.ac.aut.ense701.gameModel.Entity.Predator;
+import nz.ac.aut.ense701.gameModel.Entity.Item;
+import nz.ac.aut.ense701.gameModel.Entity.Player;
+import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
+import nz.ac.aut.ense701.gameModel.Utils.GameState;
+import nz.ac.aut.ense701.gameModel.Map.Position;
+import nz.ac.aut.ense701.gameModel.Map.Island;
 import org.junit.Test;
 
 /**
