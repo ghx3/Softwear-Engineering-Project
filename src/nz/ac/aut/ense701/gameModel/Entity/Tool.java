@@ -85,12 +85,5 @@ public class Tool extends Item
         return "T";
     }
 
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.tool, (int)getPosition().getRow()* Tile.TILE_WIDTH
-               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH, 
-               DEFAULT_OCCUPANT_WIDTH,DEFAULT_OCCUPANT_HEIGHT, null);
-    }
-    
     
 }

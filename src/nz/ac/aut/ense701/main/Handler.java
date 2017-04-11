@@ -22,11 +22,11 @@ public class Handler {
     }
 
     public int getWorldWidthSize() {
-        return island.getNumRows() * Tile.TILE_WIDTH;
+        return island.getNumRows() * getGameController().getTileSizeX();
     }
 
     public int getWorldHeightSize() {
-        return island.getNumColumns() * Tile.TILE_HEIGTH;
+        return island.getNumColumns() * getGameController().getTileSizeY();
     }
 
     public int getWidth() {

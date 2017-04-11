@@ -36,8 +36,6 @@ import nz.ac.aut.ense701.gameModel.Tile.Tile;
  */
 public class GameController {
 
-    private Handler handler;
-    
     //Constants shared with UI to provide player data
     public static final int STAMINA_INDEX = 0;
     public static final int MAXSTAMINA_INDEX = 1;
@@ -54,6 +52,9 @@ public class GameController {
     private int totalKiwis;
     private int predatorsTrapped;
     private Set<GameEventListener> eventListeners;
+    private Handler handler;
+    private int tileSizeX;
+    private int tileSizeY;
 
     private final double MIN_REQUIRED_CATCH = 0.8;
 
@@ -75,20 +76,21 @@ public class GameController {
      * Starts a new game. At this stage data is being read from a text file
      */
     public void createNewGame() {
-        
-        WorldCreator world = new WorldCreator(handler,"IslandData.txt");
-        
+
+        WorldCreator world = new WorldCreator(handler, "IslandData.txt");
         handler.setIsland(world.getIsland());
-                
+
         totalPredators = world.getTotalPredators();
         totalKiwis = world.getTotalKiwis();
         predatorsTrapped = 0;
         kiwiCount = 0;
-        
-        player= world.getPlayer();
+
+        player = world.getPlayer();
         island = world.getIsland();
         drawIsland();
-                       
+        
+        tileSizeX = handler.getWidth() / island.getNumRows();
+        tileSizeY = handler.getHeight() / island.getNumColumns();
         
         state = GameState.PLAYING;
         winMessage = "";
@@ -98,39 +100,37 @@ public class GameController {
     }
 
     public void tick() {
-        Tile.TILE_WIDTH = handler.getWidth()/island.getNumRows();
-        Tile.TILE_HEIGTH = handler.getHeight()/island.getNumRows();
-        player.tick();
-        
+        Tile.TILE_HEIGTH = getTileSizeY();
+        Tile.TILE_WIDTH = getTileSizeX();
     }
 
     public void render(Graphics g) {
-        
+
         for (int y = 0; y < getNumColumns(); y++) {
             for (int x = 0; x < getNumRows(); x++) {
-                Position position = new Position(island,x,y);
+                Position position = new Position(island, x, y);
                 Tile t = Tile.tiles[island.getTerrain(position).getCode()];
                 if (t == null) {
                     Tile.sandTile.render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGTH);;
-                }else{
+                } else {
                     t.render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGTH);
                 }
                 Occupant[] occupants = island.getOccupants(position);
-                for( Occupant occ : occupants){
+                for (Occupant occ : occupants) {
                     occ.render(g);
-                } 
-                if(island.hasPlayer(position)){
+                }
+                if (island.hasPlayer(position)) {
                     player.render(g);
-               }
+                }
             }
         }
-       
+
     }
 
     /**
      * *************************************************************************************************************
      * Mutator Methods
-    ***************************************************************************************************************
+     * **************************************************************************************************************
      */
     /**
      * Picks up an item at the current position of the player Ignores any
@@ -236,7 +236,7 @@ public class GameController {
         if (isPlayerMovePossible(direction)) {
             Position newPosition = player.getPosition().getNewPosition(direction);
             Terrain terrain = island.getTerrain(newPosition);
-            
+
             // move the player to new position
             player.moveToPosition(newPosition, terrain);
             island.updatePlayerPosition(player);
@@ -271,7 +271,7 @@ public class GameController {
     /**
      * *******************************************************************************************************************************
      * Private methods
-     ********************************************************************************************************************************
+     * *******************************************************************************************************************************
      */
     /**
      * Used after player actions to update game state. Applies the Win/Lose
@@ -417,8 +417,16 @@ public class GameController {
     /**
      * *********************************************************************************************************************
      * Accessor methods for game data
-    ***********************************************************************************************************************
+     * **********************************************************************************************************************
      */
+    public int getTileSizeY() {
+        return tileSizeY;
+    }
+
+    public int getTileSizeX() {
+        return tileSizeX;
+    }
+
     /**
      * Get number of rows on island
      *

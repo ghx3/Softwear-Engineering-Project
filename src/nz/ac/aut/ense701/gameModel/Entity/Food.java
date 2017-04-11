@@ -52,11 +52,5 @@ public class Food extends Item
     {
         return "E";
     }
-    
-    @Override
-    public void render(Graphics g) {
-       g.drawImage(Assets.food, (int)getPosition().getRow()* Tile.TILE_WIDTH
-               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH, 
-               DEFAULT_OCCUPANT_WIDTH,DEFAULT_OCCUPANT_HEIGHT, null);
-    }
+        
 }

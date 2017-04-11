@@ -43,7 +43,7 @@ public class Player extends Occupant {
      */
     public Player(Handler handler, Position position, String name, double maxStamina,
             double maxBackpackWeight, double maxBackpackSize) {
-        
+
         super(handler, position, name, "Player");
         this.maxStamina = maxStamina;
         this.stamina = maxStamina;
@@ -52,12 +52,6 @@ public class Player extends Occupant {
         this.alive = true;
         this.backpack = new HashSet<Item>();
     }
-
-    public void tick() {
-        
-    }
-
-    
 
     /**
      * ***************************************************************************************************
@@ -323,9 +317,4 @@ public class Player extends Occupant {
         return "Player";
     }
 
-    @Override
-    public void render(Graphics g) {
-        g.drawImage(Assets.player, (int) getPosition().getRow() * Tile.TILE_WIDTH, (int) getPosition().getColumn() * Tile.TILE_HEIGTH,
-                DEFAULT_OCCUPANT_WIDTH, DEFAULT_OCCUPANT_HEIGHT, null);
-    }
 }
