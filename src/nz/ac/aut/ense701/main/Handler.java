@@ -45,6 +45,7 @@ public class Handler {
         return game.getGameController();
     }
 
+    //not used atm
 //    public KeyManager getKeyManager() {
 //        if(this.game.getKeyManager() == null){
 //            return null;

@@ -364,7 +364,7 @@ public class Island
      * @param position of the square
      * @return Square with this position
      */
-    private GridSquare getGridSquare(Position position)
+    public GridSquare getGridSquare(Position position)
     {
         GridSquare result = null;
         if ( position.isOnIsland() )

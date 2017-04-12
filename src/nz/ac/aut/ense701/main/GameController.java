@@ -1,5 +1,6 @@
 package nz.ac.aut.ense701.main;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,6 +24,7 @@ import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
 import nz.ac.aut.ense701.gameModel.Entity.Tool;
+import nz.ac.aut.ense701.gameModel.Map.GridSquare;
 import nz.ac.aut.ense701.gameModel.Map.WorldCreator;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
 
@@ -88,10 +90,10 @@ public class GameController {
         player = world.getPlayer();
         island = world.getIsland();
         drawIsland();
-        
+
         tileSizeX = handler.getWidth() / island.getNumRows();
         tileSizeY = handler.getHeight() / island.getNumColumns();
-        
+
         state = GameState.PLAYING;
         winMessage = "";
         loseMessage = "";
@@ -109,18 +111,32 @@ public class GameController {
         for (int y = 0; y < getNumColumns(); y++) {
             for (int x = 0; x < getNumRows(); x++) {
                 Position position = new Position(island, x, y);
+
                 Tile t = Tile.tiles[island.getTerrain(position).getCode()];
                 if (t == null) {
                     Tile.sandTile.render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGTH);;
                 } else {
                     t.render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGTH);
                 }
-                Occupant[] occupants = island.getOccupants(position);
-                for (Occupant occ : occupants) {
-                    occ.render(g);
-                }
-                if (island.hasPlayer(position)) {
-                    player.render(g);
+
+                GridSquare square = handler.getIsland().getGridSquare(position);
+                if (!square.isVisible() && !island.hasPlayer(position)) {
+                    Color color = g.getColor();
+                    g.setColor(new Color (100, 100, 100, 150));
+                    g.fillRect(position.getRow() * Tile.TILE_WIDTH,
+                            position.getColumn() * Tile.TILE_HEIGTH,
+                            Tile.TILE_WIDTH, Tile.TILE_HEIGTH);
+                    g.setColor(color);
+                } else {
+
+                    Occupant[] occupants = island.getOccupants(position);
+                    for (Occupant occ : occupants) {
+                        occ.render(g);
+
+                    }
+                    if (island.hasPlayer(position)) {
+                        player.render(g);
+                    }
                 }
             }
         }
