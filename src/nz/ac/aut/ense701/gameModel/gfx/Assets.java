@@ -102,32 +102,32 @@ public class Assets {
         tool = sheet.crop(4*width, 0, width, height);
 
         //Add to hashmap
-        images.put("player",player );
-        images.put("sand",sand );
-        images.put("water", water);
-        images.put("scrub",scrub );
-        images.put("wetland",wetland );
-        images.put("forest",forest );
-        images.put("fernbird",fernbird );
-        images.put("heron", heron);
-        images.put("tui",tui );
-        images.put("robin",robin );
-        images.put("kiwi",kiwi );
-        images.put("apple",apple );
-        images.put("muesliBar", muesliBar);
-        images.put("orangeJuice",orangeJuice );
-        images.put("sandwich",sandwich );
-        images.put("trap",trap );
-        images.put("sun",sun );
-        images.put("pond", pond);
-        images.put("cliff",cliff );
-        images.put("rock",rock );
-        images.put("brokenTrap",brokenTrap );
-        images.put("possum",possum );
-        images.put("cat", cat);
-        images.put("rat",rat );
-        images.put("kiore",kiore );
-        images.put("tool",tool );
+        images.put("Player",player );
+        images.put("Sand",sand );
+        images.put("Water", water);
+        images.put("Scrub",scrub );
+        images.put("Wetland",wetland );
+        images.put("Forest",forest );
+        images.put("Fernbird",fernbird );
+        images.put("Heron", heron);
+        images.put("Tui",tui );
+        images.put("Robin",robin );
+        images.put("Kiwi",kiwi );
+        images.put("Apple",apple );
+        images.put("MuesliBar", muesliBar);
+        images.put("OrangeJuice",orangeJuice );
+        images.put("Sandwich",sandwich );
+        images.put("Trap",trap );
+        images.put("Sun",sun );
+        images.put("Pond", pond);
+        images.put("Cliff",cliff );
+        images.put("Rock",rock );
+        images.put("BrokenTrap",brokenTrap );
+        images.put("Possum",possum );
+        images.put("Cat", cat);
+        images.put("Rat",rat );
+        images.put("Kiore",kiore );
+        images.put("Tool",tool );
         
     }
     
