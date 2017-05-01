@@ -1,4 +1,4 @@
-package nz.ac.aut.ense701.gui;
+package nz.ac.aut.ense701.gameModel.Utils;
 
 
 import java.awt.event.KeyEvent;

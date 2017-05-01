@@ -132,7 +132,7 @@ public class Assets {
     }
     
     public static BufferedImage bindImage(String name){
-        return images.get("hazard");
+        return images.get(name);
         
     }
 }
