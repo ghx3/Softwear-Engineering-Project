@@ -120,14 +120,14 @@ public class GameController {
                 }
 
                 GridSquare square = handler.getIsland().getGridSquare(position);
-                if (!square.isVisible() && !island.hasPlayer(position)) {
-                    Color color = g.getColor();
-                    g.setColor(new Color (100, 100, 100, 150));
-                    g.fillRect(position.getRow() * Tile.TILE_WIDTH,
-                            position.getColumn() * Tile.TILE_HEIGTH,
-                            Tile.TILE_WIDTH, Tile.TILE_HEIGTH);
-                    g.setColor(color);
-                } else {
+//                if (!square.isVisible() && !island.hasPlayer(position)) {
+//                    Color color = g.getColor();
+//                    g.setColor(new Color (100, 100, 100, 150));
+//                    g.fillRect(position.getRow() * Tile.TILE_WIDTH,
+//                            position.getColumn() * Tile.TILE_HEIGTH,
+//                            Tile.TILE_WIDTH, Tile.TILE_HEIGTH);
+////                    g.setColor(color);
+//                } else {
 
                     Occupant[] occupants = island.getOccupants(position);
                     for (Occupant occ : occupants) {
@@ -137,7 +137,7 @@ public class GameController {
                     if (island.hasPlayer(position)) {
                         player.render(g);
                     }
-                }
+//                }
             }
         }
 
