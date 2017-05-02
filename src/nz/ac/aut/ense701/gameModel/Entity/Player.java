@@ -1,6 +1,7 @@
 package nz.ac.aut.ense701.gameModel.Entity;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
 import java.util.Collection;
@@ -11,6 +12,7 @@ import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_HEIGH
 import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_WIDTH;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
+import nz.ac.aut.ense701.gameModel.gfx.Animation;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
 import nz.ac.aut.ense701.main.Handler;
 
@@ -25,6 +27,8 @@ public class Player extends Occupant {
     public static final int DEFAULT_PLAYER_WIDTH = 32;
     public static final int DEFAULT_PLAYER_HEIGHT = 32;
     
+    //private Animation animDown, animUp, animLeft, animRight;//to be used for animation purpose
+    
     public static final double MOVE_STAMINA = 1.0;
 
     private final double maxStamina;
@@ -33,6 +37,11 @@ public class Player extends Occupant {
     private Set<Item> backpack;
     private final double maxBackpackWeight;
     private final double maxBackpackSize;
+    public MoveDirection direction;
+
+    public void setDirection(MoveDirection direction) {
+        this.direction = direction;
+    }
 
     /**
      * Constructs a new player object.
@@ -54,6 +63,12 @@ public class Player extends Occupant {
         this.maxBackpackSize = maxBackpackSize;
         this.alive = true;
         this.backpack = new HashSet<Item>();
+        
+        //Animatons
+//        animDown = new Animation(500, Assets.player_down);
+//        animUp = new Animation(500, Assets.player_up);
+//        animLeft = new Animation(500, Assets.player_left);
+//        animRight = new Animation(500, Assets.player_right);
     }
 
     /**
@@ -325,9 +340,29 @@ public class Player extends Occupant {
         int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_PLAYER_WIDTH)/2;
         int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_PLAYER_HEIGHT)/2; 
         
-        g.drawImage(Assets.bindImage(name), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
+        g.drawImage(getCurrentAnimation(), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
                , (int)getPosition().getColumn()* Tile.TILE_HEIGTH + yOffset, 
                DEFAULT_PLAYER_WIDTH,DEFAULT_PLAYER_HEIGHT, null);
     }
     
+    
+    //GEts the picture corresponding to the direction player is headig to. This method will be used for animation in the future
+    private BufferedImage getCurrentAnimation() {
+       
+        if(direction == MoveDirection.WEST){
+           //return animLeft.getCurrentFrame();
+           return Assets.player_left[0];
+        }else if(direction == MoveDirection.EAST){
+//           return animRight.getCurrentFrame();
+            return Assets.player_right[0];
+       }
+       if(direction == MoveDirection.NORTH){
+          //return  animUp.getCurrentFrame();
+          return Assets.player_up[0];
+       }else{
+           //return animDown.getCurrentFrame();
+           return Assets.player_down[0];
+                   
+       }
+    }
 }

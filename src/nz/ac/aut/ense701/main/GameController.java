@@ -255,6 +255,7 @@ public class GameController {
 
             // move the player to new position
             player.moveToPosition(newPosition, terrain);
+            player.setDirection(direction);
             island.updatePlayerPosition(player);
             successfulMove = true;
 
