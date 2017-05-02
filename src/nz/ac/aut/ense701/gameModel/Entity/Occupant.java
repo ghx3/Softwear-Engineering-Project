@@ -16,7 +16,7 @@ import nz.ac.aut.ense701.main.Handler;
 public abstract class Occupant 
 {
     public static final int DEFAULT_OCCUPANT_WIDTH = 50;
-    public static final int DEFAULT_OCCUPANT_HEIGHT =50;
+    public static final int DEFAULT_OCCUPANT_HEIGHT = 50;
     protected Position position;
     protected final String   name;
     protected final String   description;

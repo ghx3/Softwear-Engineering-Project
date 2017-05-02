@@ -21,7 +21,10 @@ import nz.ac.aut.ense701.main.Handler;
  * @version July 2011
  */
 public class Player extends Occupant {
-
+    
+    public static final int DEFAULT_PLAYER_WIDTH = 32;
+    public static final int DEFAULT_PLAYER_HEIGHT = 32;
+    
     public static final double MOVE_STAMINA = 1.0;
 
     private final double maxStamina;
@@ -317,4 +320,14 @@ public class Player extends Occupant {
         return "Player";
     }
 
+
+    public void render(Graphics g){
+        int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_PLAYER_WIDTH)/2;
+        int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_PLAYER_HEIGHT)/2; 
+        
+        g.drawImage(Assets.bindImage(name), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
+               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH + yOffset, 
+               DEFAULT_PLAYER_WIDTH,DEFAULT_PLAYER_HEIGHT, null);
+    }
+    
 }

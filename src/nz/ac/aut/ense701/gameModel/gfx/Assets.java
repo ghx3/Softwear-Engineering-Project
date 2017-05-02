@@ -16,7 +16,8 @@ public class Assets {
 
     public static BufferedImage fernbird,
             heron, tui, robin, kiwi, apple, muesliBar, orangeJuice, sandwich, trap,
-            sun, pond, cliff, rock, brokenTrap, possum, cat, rat, kiore, tool;
+            sun, pond, cliff, rock, brokenTrap, possum, cat, rat, kiore, tool,oystercatcher,
+            crab,fall,stoat;
 
     private static HashMap<String, BufferedImage> images;
 
@@ -30,11 +31,42 @@ public class Assets {
         scrub = sheet.crop(width + 2, 5, width - 5, height - 12);
         wetland = sheet.crop((3 * width), 5, width - 2, height - 10);
 
-        SpriteSheet occupants = new SpriteSheet(ImageLoader.loadImage("/textures/Pictures.png"));
+        SpriteSheet occupants = new SpriteSheet(ImageLoader.loadImage("/textures/cleanPics.png"));
     
-
+        //1st row
         apple = occupants.crop(0, 0, width, height);
-   
+        cat = occupants.crop(width, 0, width, height);
+        fernbird = occupants.crop(2*width, 0, width, height);
+        heron = occupants.crop(3*width, 0, width, height);
+        kiore = occupants.crop(4*width, 0, width, height);
+        
+        //2nd row
+        kiwi = occupants.crop(0, height, width, height);
+        muesliBar = occupants.crop(width, height, width, height);
+        orangeJuice = occupants.crop(2*width, height, width, height);
+        pond = occupants.crop(3*width, height, width, height);
+        possum = occupants.crop(4*width, height, width, height);
+        
+           //3nd row
+        rat = occupants.crop(0, 2*height, width, height);
+        robin = occupants.crop(width,2* height, width, height);
+        rock = occupants.crop(2*width,2* height, width, height);
+        tool = occupants.crop(3*width, 2*height, width, height);
+        sun = occupants.crop(4*width, 2* height, width, height);
+        
+          //4th row
+        trap = occupants.crop(0, 3*height, width, height);
+        tui = occupants.crop(width,3* height, width, height);
+         cliff = occupants.crop(2*width, 3*height, width, height);
+        sandwich = occupants.crop(3*width,3* height, width, height);
+         oystercatcher = occupants.crop(4*width, 3*height, width, height);
+       
+      //5th row
+        brokenTrap = occupants.crop(0, 4*height, width, height);
+         crab = occupants.crop(width,4* height, width, height);
+         fall = occupants.crop(2*width, 4*height, width, height);
+         stoat = occupants.crop(3*width,4* height, width, height);
+//         = occupants.crop(4*width, 4*height, width, height);
 
         //Add to hashmap
         images.put("Player", player);
@@ -50,7 +82,7 @@ public class Assets {
         images.put("Kiwi", kiwi);
         images.put("Apple", apple);
         images.put("MuesliBar", muesliBar);
-        images.put("OrangeJuice", orangeJuice);
+        images.put("Orange Juice", orangeJuice);
         images.put("Sandwich", sandwich);
         images.put("Trap", trap);
         images.put("Sun", sun);
@@ -62,8 +94,11 @@ public class Assets {
         images.put("Cat", cat);
         images.put("Rat", rat);
         images.put("Kiore", kiore);
-        images.put("Tool", tool);
-
+        images.put("Screwdriver", tool);
+        images.put("Oystercatcher", oystercatcher);
+        images.put("Crab", crab);
+        images.put("Fall", fall);
+        images.put("Stoat", stoat);
     }
 
     public static BufferedImage bindImage(String name) {
