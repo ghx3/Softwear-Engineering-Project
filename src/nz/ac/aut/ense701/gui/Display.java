@@ -91,11 +91,12 @@ public class Display implements GameEventListener, KeyListener {
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
+        
 
         JPanel pnlContent = new JPanel();
 
         JPanel pnlControls = InitMenuControl();
-
+        
         pnlContent.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         pnlContent.setLayout(new BorderLayout(10, 0));
         pnlContent.add(canvas, BorderLayout.WEST);
@@ -108,7 +109,7 @@ public class Display implements GameEventListener, KeyListener {
      * Updates the state of the UI based on the state of the game.
      */
     private void update() {
-
+        canvas.setFocusable(true);
         // update player information
         int[] playerValues = handler.getGameController().getPlayerValues();
         txtPlayerName.setText(handler.getGameController().getPlayerName());
@@ -188,6 +189,7 @@ public class Display implements GameEventListener, KeyListener {
     }
 
     private void listObjectsValueChanged(ListSelectionEvent evt) {
+        listObjects.setFocusable(false);
         Object occ = listObjects.getSelectedValue();
         if (occ != null) {
             btnCollect.setEnabled(handler.getGameController().canCollect(occ));
@@ -201,6 +203,7 @@ public class Display implements GameEventListener, KeyListener {
     }
 
     private void listInventoryValueChanged(ListSelectionEvent evt) {
+        listInventory.setFocusable(false);
         Object item = listInventory.getSelectedValue();
         btnDrop.setEnabled(true);
         if (item != null) {
@@ -382,6 +385,7 @@ public class Display implements GameEventListener, KeyListener {
         listInventory.setVisibleRowCount(3);
         listInventory.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                
                 listInventoryValueChanged(evt);
             }
         });
@@ -458,6 +462,7 @@ public class Display implements GameEventListener, KeyListener {
         listObjects.setVisibleRowCount(3);
         listObjects.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                
                 listObjectsValueChanged(evt);
             }
         });
@@ -528,6 +533,7 @@ public class Display implements GameEventListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+       
         if (e.getKeyCode() == KeyEvent.VK_W) {
             handler.getGameController().playerMove(MoveDirection.NORTH);
         }
