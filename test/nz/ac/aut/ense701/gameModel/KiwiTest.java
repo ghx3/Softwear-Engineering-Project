@@ -1,8 +1,7 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.Entity.Kiwi;
-import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Map.Island;
+import nz.ac.aut.ense701.gameModel.Entity.creature.Kiwi;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

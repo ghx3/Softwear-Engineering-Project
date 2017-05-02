@@ -36,6 +36,15 @@ public abstract class Occupant
         this.description = description;        
     }
     
+    //for testing purpose
+    public Occupant(Position position, String name, String description) 
+    {
+        this.handler = handler;
+        this.position    = position;
+        this.name        = name;
+        this.description = description;        
+    }
+    
     /**
      * Returns the position of the occupant.
      * 

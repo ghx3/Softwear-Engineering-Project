@@ -1,15 +1,15 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.Entity.Food;
-import nz.ac.aut.ense701.gameModel.Entity.Tool;
-import nz.ac.aut.ense701.gameModel.Entity.Hazard;
-import nz.ac.aut.ense701.gameModel.Entity.Predator;
-import nz.ac.aut.ense701.gameModel.Entity.Item;
-import nz.ac.aut.ense701.gameModel.Entity.Player;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
-import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Map.Island;
+import nz.ac.aut.ense701.gameModel.Entity.Static.Tool;
+import nz.ac.aut.ense701.gameModel.Entity.creature.Predator;
+import nz.ac.aut.ense701.gameModel.Entity.creature.Player;
+import nz.ac.aut.ense701.gameModel.Entity.Static.Item;
+import nz.ac.aut.ense701.gameModel.Entity.Static.Hazard;
+import nz.ac.aut.ense701.gameModel.Entity.Static.Food;
+import nz.ac.aut.ense701.main.GameController;
 import org.junit.Test;
 
 /**
@@ -20,7 +20,7 @@ import org.junit.Test;
  */
 public class GameTest extends junit.framework.TestCase
 {
-    Game       game;
+    GameController       game;
     Player     player;
     Position   playerPosition;
     Island island ;
@@ -42,7 +42,7 @@ public class GameTest extends junit.framework.TestCase
     {
         // Create a new game from the data file.
         // Player is in position 2,0 & has 100 units of stamina
-        game           = new Game();
+        game           = new GameController();
         playerPosition = game.getPlayer().getPosition();
         player         = game.getPlayer();
         island = game.getIsland();
@@ -126,12 +126,12 @@ public class GameTest extends junit.framework.TestCase
     @Test
     public void testGetPlayerValues(){
         int[] values = game.getPlayerValues();
-        assertEquals("Check Max backpack size.", values[Game.MAXSIZE_INDEX], 5);    
-        assertEquals("Check max stamina.", values[Game.MAXSTAMINA_INDEX], 100);
-        assertEquals("Check max backpack weight.", values[Game.MAXWEIGHT_INDEX], 10);
-        assertEquals("Check initialstamina", values[Game.STAMINA_INDEX], 100);
-        assertEquals("Check initial backpack weight.", values[Game.WEIGHT_INDEX], 0);
-        assertEquals("Check initial backp[ack size.", values[Game.SIZE_INDEX], 0);
+        assertEquals("Check Max backpack size.", values[GameController.MAXSIZE_INDEX], 5);    
+        assertEquals("Check max stamina.", values[GameController.MAXSTAMINA_INDEX], 100);
+        assertEquals("Check max backpack weight.", values[GameController.MAXWEIGHT_INDEX], 10);
+        assertEquals("Check initialstamina", values[GameController.STAMINA_INDEX], 100);
+        assertEquals("Check initial backpack weight.", values[GameController.WEIGHT_INDEX], 0);
+        assertEquals("Check initial backp[ack size.", values[GameController.SIZE_INDEX], 0);
     }
     
     @Test

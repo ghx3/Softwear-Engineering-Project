@@ -1,14 +1,13 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.Entity.Food;
-import nz.ac.aut.ense701.gameModel.Entity.Tool;
-import nz.ac.aut.ense701.gameModel.Entity.Predator;
-import nz.ac.aut.ense701.gameModel.Entity.Player;
-import nz.ac.aut.ense701.gameModel.Entity.Occupant;
-import nz.ac.aut.ense701.gameModel.Map.Position;
-import nz.ac.aut.ense701.gameModel.Map.Island;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
+import nz.ac.aut.ense701.gameModel.Map.Island;
 import nz.ac.aut.ense701.gameModel.Map.GridSquare;
+import nz.ac.aut.ense701.gameModel.Entity.Occupant;
+import nz.ac.aut.ense701.gameModel.Entity.Static.Tool;
+import nz.ac.aut.ense701.gameModel.Entity.creature.Predator;
+import nz.ac.aut.ense701.gameModel.Entity.creature.Player;
+import nz.ac.aut.ense701.gameModel.Entity.Static.Food;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

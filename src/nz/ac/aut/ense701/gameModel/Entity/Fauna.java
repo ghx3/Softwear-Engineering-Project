@@ -28,7 +28,11 @@ public class Fauna extends Occupant {
     public Fauna(Handler handler, Position pos, String name, String description) {
         super(handler, pos, name, description);
     }
-
+    
+    //For testing purpose
+    public Fauna( Position pos, String name, String description) {
+        super( pos, name, description);
+    }
     @Override
     public String getStringRepresentation() {
         return "F";
