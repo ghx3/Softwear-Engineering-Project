@@ -1,6 +1,7 @@
 package nz.ac.aut.ense701.gameModel.Entity;
 
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
@@ -12,8 +13,9 @@ import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_HEIGH
 import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_WIDTH;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
-import nz.ac.aut.ense701.gameModel.gfx.Animation;
+
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
+import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.Handler;
 
 /**
@@ -23,12 +25,11 @@ import nz.ac.aut.ense701.main.Handler;
  * @version July 2011
  */
 public class Player extends Occupant {
-    
+
     public static final int DEFAULT_PLAYER_WIDTH = 32;
     public static final int DEFAULT_PLAYER_HEIGHT = 32;
-    
-    //private Animation animDown, animUp, animLeft, animRight;//to be used for animation purpose
-    
+
+
     public static final double MOVE_STAMINA = 1.0;
 
     private final double maxStamina;
@@ -37,7 +38,11 @@ public class Player extends Occupant {
     private Set<Item> backpack;
     private final double maxBackpackWeight;
     private final double maxBackpackSize;
-    public MoveDirection direction;
+
+    private MoveDirection direction;
+    private float speed = 5.0f;
+    private float xMove, yMove;
+
 
     public void setDirection(MoveDirection direction) {
         this.direction = direction;
@@ -46,6 +51,7 @@ public class Player extends Occupant {
     /**
      * Constructs a new player object.
      *
+     * @param handler
      * @param position the initial position of the player
      * @param name the name of the player
      * @param maxStamina the maximum stamina level of the player
@@ -63,12 +69,56 @@ public class Player extends Occupant {
         this.maxBackpackSize = maxBackpackSize;
         this.alive = true;
         this.backpack = new HashSet<Item>();
+        xMove = position.getRow() * Game.TILE_WIDTH;
+        yMove = position.getColumn() * Game.TILE_HEIGTH;
+     
         
-        //Animatons
-//        animDown = new Animation(500, Assets.player_down);
-//        animUp = new Animation(500, Assets.player_up);
-//        animLeft = new Animation(500, Assets.player_left);
-//        animRight = new Animation(500, Assets.player_right);
+        
+    }
+         
+    public void move(KeyEvent e) {
+
+        
+        boolean movedTiles = false;
+        int cX = (int) xMove / Game.TILE_WIDTH;
+        int cY = (int) yMove / Game.TILE_HEIGTH;
+        if ((cX != position.getRow()) || (cY != position.getColumn())) {
+//            System.out.println("Current X = " + pos.getRow() + "  Current Y = " + pos.getColumn());
+//            System.out.println("cx = " + cX + "  cY = " + cY);
+//            System.out.println("xMove = " + xMove + "  yMove = " + yMove);
+//            System.out.println();
+            movedTiles = true;
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+            yMove -= speed;
+            setDirection(MoveDirection.NORTH);
+            if (movedTiles) {
+                handler.getGameController().playerMove(MoveDirection.NORTH);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+            yMove += speed;
+            setDirection(MoveDirection.SOUTH);
+            if (movedTiles) {
+                handler.getGameController().playerMove(MoveDirection.SOUTH);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            xMove -= speed;
+            setDirection(MoveDirection.WEST);
+            if (movedTiles) {
+                handler.getGameController().playerMove(MoveDirection.WEST);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            xMove += speed;
+            setDirection(MoveDirection.EAST);
+            if (movedTiles) {
+                handler.getGameController().playerMove(MoveDirection.EAST);
+            }
+        }
+
     }
 
     /**
@@ -335,34 +385,35 @@ public class Player extends Occupant {
         return "Player";
     }
 
-
-    public void render(Graphics g){
-        int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_PLAYER_WIDTH)/2;
-        int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_PLAYER_HEIGHT)/2; 
-        
-        g.drawImage(getCurrentAnimation(), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
-               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH + yOffset, 
-               DEFAULT_PLAYER_WIDTH,DEFAULT_PLAYER_HEIGHT, null);
+    public void render(Graphics g) {
+//        int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_PLAYER_WIDTH)/2;
+//        int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_PLAYER_HEIGHT)/2; 
+//        
+//        g.drawImage(getCurrentAnimation(), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
+//               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH + yOffset, 
+//               DEFAULT_PLAYER_WIDTH,DEFAULT_PLAYER_HEIGHT, null);
+        g.drawImage(getCurrentAnimation(), (int) xMove, (int) yMove,
+                DEFAULT_PLAYER_WIDTH, DEFAULT_PLAYER_HEIGHT, null);
     }
-    
-    
+
     //GEts the picture corresponding to the direction player is headig to. This method will be used for animation in the future
     private BufferedImage getCurrentAnimation() {
-       
-        if(direction == MoveDirection.WEST){
-           //return animLeft.getCurrentFrame();
-           return Assets.player_left[0];
-        }else if(direction == MoveDirection.EAST){
-//           return animRight.getCurrentFrame();
-            return Assets.player_right[0];
-       }
-       if(direction == MoveDirection.NORTH){
-          //return  animUp.getCurrentFrame();
-          return Assets.player_up[0];
-       }else{
-           //return animDown.getCurrentFrame();
-           return Assets.player_down[0];
-                   
-       }
+    
+        if (direction == MoveDirection.WEST) {
+          
+            return Assets.player_left[1];
+        } else if (direction == MoveDirection.EAST) {
+         
+            return Assets.player_right[1];
+        }
+        if (direction == MoveDirection.NORTH) {
+//            
+            return Assets.player_up[1];
+        } else {
+//            
+            return Assets.player_down[1];
+
+        }
+        
     }
 }

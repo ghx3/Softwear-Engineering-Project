@@ -102,8 +102,9 @@ public class GameController {
     }
 
     public void tick() {
-        Tile.TILE_HEIGTH = getTileSizeY();
-        Tile.TILE_WIDTH = getTileSizeX();
+        Game.TILE_HEIGTH = getTileSizeY();
+        Game.TILE_WIDTH = getTileSizeX();
+        //player.tick();
     }
 
     public void render(Graphics g) {
@@ -114,20 +115,20 @@ public class GameController {
 
                 Tile t = Tile.tiles[island.getTerrain(position).getCode()];
                 if (t == null) {
-                    Tile.sandTile.render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGTH);;
+                    Tile.sandTile.render(g, x * Game.TILE_WIDTH, y * Game.TILE_HEIGTH);;
                 } else {
-                    t.render(g, x * Tile.TILE_WIDTH, y * Tile.TILE_HEIGTH);
+                    t.render(g, x * Game.TILE_WIDTH, y * Game.TILE_HEIGTH);
                 }
 
                 GridSquare square = handler.getIsland().getGridSquare(position);
-//                if (!square.isVisible() && !island.hasPlayer(position)) {
-//                    Color color = g.getColor();
-//                    g.setColor(new Color (100, 100, 100, 150));
-//                    g.fillRect(position.getRow() * Tile.TILE_WIDTH,
-//                            position.getColumn() * Tile.TILE_HEIGTH,
-//                            Tile.TILE_WIDTH, Tile.TILE_HEIGTH);
-////                    g.setColor(color);
-//                } else {
+                if (!square.isVisible() && !island.hasPlayer(position)) {
+                    Color color = g.getColor();
+                    g.setColor(new Color (100, 100, 100, 150));
+                    g.fillRect(position.getRow() * Game.TILE_WIDTH,
+                            position.getColumn() * Game.TILE_HEIGTH,
+                            Game.TILE_WIDTH, Game.TILE_HEIGTH);
+//                    g.setColor(color);
+                } else {
 
                     Occupant[] occupants = island.getOccupants(position);
                     for (Occupant occ : occupants) {
@@ -135,11 +136,12 @@ public class GameController {
 
                     }
                     if (island.hasPlayer(position)) {
-                        player.render(g);
+                        
                     }
-//                }
+                }
             }
         }
+        player.render(g);
 
     }
 
@@ -255,7 +257,6 @@ public class GameController {
 
             // move the player to new position
             player.moveToPosition(newPosition, terrain);
-            player.setDirection(direction);
             island.updatePlayerPosition(player);
             successfulMove = true;
 

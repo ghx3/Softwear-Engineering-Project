@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
+import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.Handler;
 
 /**
@@ -108,8 +109,8 @@ public abstract class Occupant
         int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_OCCUPANT_WIDTH)/2;
         int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_OCCUPANT_HEIGHT)/2; 
         
-        g.drawImage(Assets.bindImage(name), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
-               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH + yOffset, 
+        g.drawImage(Assets.bindImage(name), (int)getPosition().getRow()* Game.TILE_WIDTH + xOffset
+               , (int)getPosition().getColumn()* Game.TILE_HEIGTH + yOffset, 
                DEFAULT_OCCUPANT_WIDTH,DEFAULT_OCCUPANT_HEIGHT, null);
     }
 }

@@ -104,122 +104,14 @@ public class Display implements GameEventListener, KeyListener {
         frame.getContentPane().add(pnlContent, BorderLayout.CENTER);
 
     }
-
-    /**
-     * Updates the state of the UI based on the state of the game.
-     */
-    private void update() {
-        canvas.setFocusable(true);
-        // update player information
-        int[] playerValues = handler.getGameController().getPlayerValues();
-        txtPlayerName.setText(handler.getGameController().getPlayerName());
-        progPlayerStamina.setMaximum(playerValues[GameController.MAXSTAMINA_INDEX]);
-        progPlayerStamina.setValue(playerValues[GameController.STAMINA_INDEX]);
-        progBackpackWeight.setMaximum(playerValues[GameController.MAXWEIGHT_INDEX]);
-        progBackpackWeight.setValue(playerValues[GameController.WEIGHT_INDEX]);
-        progBackpackSize.setMaximum(playerValues[GameController.MAXSIZE_INDEX]);
-        progBackpackSize.setValue(playerValues[GameController.SIZE_INDEX]);
-
-        //Update Kiwi and Predator information
-        txtKiwisCounted.setText(Integer.toString(handler.getGameController().getKiwiCount()));
-        txtPredatorsLeft.setText(Integer.toString(handler.getGameController().getPredatorsRemaining()));
-
-        // update inventory list
-        listInventory.setListData(handler.getGameController().getPlayerInventory());
-        listInventory.clearSelection();
-        listInventory.setToolTipText(null);
-        btnUse.setEnabled(false);
-        btnDrop.setEnabled(false);
-
-        // update list of visible objects
-        listObjects.setListData(handler.getGameController().getOccupantsPlayerPosition());
-        listObjects.clearSelection();
-        listObjects.setToolTipText(null);
-        btnCollect.setEnabled(false);
-        btnCount.setEnabled(false);
-    }
-
-    public Canvas getCanvas() {
-        return canvas;
-    }
-
-    public JFrame getFrame() {
-        return frame;
-    }
-
-    /**
-     * This method is called by the game model every time something changes.
-     * Trigger an update.
-     */
-    public void gameStateChanged() {
-        update();
-
-        // check for "game over" or "game won"
-        if (handler.getGameController().getState() == GameState.LOST) {
-            JOptionPane.showMessageDialog(
-                    frame,
-                    handler.getGameController().getLoseMessage(), "Game over!",
-                    JOptionPane.INFORMATION_MESSAGE);
-            handler.getGameController().createNewGame();
-        } else if (handler.getGameController().getState() == GameState.WON) {
-            JOptionPane.showMessageDialog(
-                    frame,
-                    handler.getGameController().getWinMessage(), "Well Done!",
-                    JOptionPane.INFORMATION_MESSAGE);
-            handler.getGameController().createNewGame();
-        } else if (handler.getGameController().messageForPlayer()) {
-            JOptionPane.showMessageDialog(
-                    frame,
-                    handler.getGameController().getPlayerMessage(), "Important Information",
-                    JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-
-    private void setAsGameListener() {
-        handler.getGameController().addGameEventListener(this);
-    }
-
-    private void btnCollectActionPerformed(ActionEvent evt) {
-        Object obj = listObjects.getSelectedValue();
-        handler.getGameController().collectItem(obj);
-    }
-
-    private void btnDropActionPerformed(ActionEvent evt) {
-        handler.getGameController().dropItem(listInventory.getSelectedValue());
-    }
-
-    private void listObjectsValueChanged(ListSelectionEvent evt) {
-        listObjects.setFocusable(false);
-        Object occ = listObjects.getSelectedValue();
-        if (occ != null) {
-            btnCollect.setEnabled(handler.getGameController().canCollect(occ));
-            btnCount.setEnabled(handler.getGameController().canCount(occ));
-            listObjects.setToolTipText(handler.getGameController().getOccupantDescription(occ));
-        }
-    }
-
-    private void btnUseActionPerformed(ActionEvent evt) {
-        handler.getGameController().useItem(listInventory.getSelectedValue());
-    }
-
-    private void listInventoryValueChanged(ListSelectionEvent evt) {
-        listInventory.setFocusable(false);
-        Object item = listInventory.getSelectedValue();
-        btnDrop.setEnabled(true);
-        if (item != null) {
-            btnUse.setEnabled(handler.getGameController().canUse(item));
-            listInventory.setToolTipText(handler.getGameController().getOccupantDescription(item));
-        }
-    }
-
-    private void btnCountActionPerformed(ActionEvent evt) {
-        handler.getGameController().countKiwi();
-    }
-
+    
     public JPanel InitMenuControl() {
 
         GridBagConstraints gridBagConstraints;
         JPanel pnlControls = new JPanel();
+        pnlControls.setPreferredSize(new Dimension(280, height));
+        pnlControls.setMaximumSize(new Dimension(280, height));
+        pnlControls.setMinimumSize(new Dimension(280, height));
 
         JPanel pnlPlayer = new JPanel();
         JPanel pnlPlayerData = new JPanel();
@@ -526,6 +418,117 @@ public class Display implements GameEventListener, KeyListener {
         return pnlControls;
     }
 
+    /**
+     * Updates the state of the UI based on the state of the game.
+     */
+    private void update() {
+        canvas.setFocusable(true);
+        // update player information
+        int[] playerValues = handler.getGameController().getPlayerValues();
+        txtPlayerName.setText(handler.getGameController().getPlayerName());
+        progPlayerStamina.setMaximum(playerValues[GameController.MAXSTAMINA_INDEX]);
+        progPlayerStamina.setValue(playerValues[GameController.STAMINA_INDEX]);
+        progBackpackWeight.setMaximum(playerValues[GameController.MAXWEIGHT_INDEX]);
+        progBackpackWeight.setValue(playerValues[GameController.WEIGHT_INDEX]);
+        progBackpackSize.setMaximum(playerValues[GameController.MAXSIZE_INDEX]);
+        progBackpackSize.setValue(playerValues[GameController.SIZE_INDEX]);
+
+        //Update Kiwi and Predator information
+        txtKiwisCounted.setText(Integer.toString(handler.getGameController().getKiwiCount()));
+        txtPredatorsLeft.setText(Integer.toString(handler.getGameController().getPredatorsRemaining()));
+
+        // update inventory list
+        listInventory.setListData(handler.getGameController().getPlayerInventory());
+        listInventory.clearSelection();
+        listInventory.setToolTipText(null);
+        btnUse.setEnabled(false);
+        btnDrop.setEnabled(false);
+
+        // update list of visible objects
+        listObjects.setListData(handler.getGameController().getOccupantsPlayerPosition());
+        listObjects.clearSelection();
+        listObjects.setToolTipText(null);
+        btnCollect.setEnabled(false);
+        btnCount.setEnabled(false);
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    /**
+     * This method is called by the game model every time something changes.
+     * Trigger an update.
+     */
+    public void gameStateChanged() {
+        update();
+
+        // check for "game over" or "game won"
+        if (handler.getGameController().getState() == GameState.LOST) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    handler.getGameController().getLoseMessage(), "Game over!",
+                    JOptionPane.INFORMATION_MESSAGE);
+            handler.getGameController().createNewGame();
+        } else if (handler.getGameController().getState() == GameState.WON) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    handler.getGameController().getWinMessage(), "Well Done!",
+                    JOptionPane.INFORMATION_MESSAGE);
+            handler.getGameController().createNewGame();
+        } else if (handler.getGameController().messageForPlayer()) {
+            JOptionPane.showMessageDialog(
+                    frame,
+                    handler.getGameController().getPlayerMessage(), "Important Information",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    private void setAsGameListener() {
+        handler.getGameController().addGameEventListener(this);
+    }
+
+    private void btnCollectActionPerformed(ActionEvent evt) {
+        Object obj = listObjects.getSelectedValue();
+        handler.getGameController().collectItem(obj);
+    }
+
+    private void btnDropActionPerformed(ActionEvent evt) {
+        handler.getGameController().dropItem(listInventory.getSelectedValue());
+    }
+
+    private void listObjectsValueChanged(ListSelectionEvent evt) {
+        listObjects.setFocusable(false);
+        Object occ = listObjects.getSelectedValue();
+        if (occ != null) {
+            btnCollect.setEnabled(handler.getGameController().canCollect(occ));
+            btnCount.setEnabled(handler.getGameController().canCount(occ));
+            listObjects.setToolTipText(handler.getGameController().getOccupantDescription(occ));
+        }
+    }
+
+    private void btnUseActionPerformed(ActionEvent evt) {
+        handler.getGameController().useItem(listInventory.getSelectedValue());
+    }
+
+    private void listInventoryValueChanged(ListSelectionEvent evt) {
+        listInventory.setFocusable(false);
+        Object item = listInventory.getSelectedValue();
+        btnDrop.setEnabled(true);
+        if (item != null) {
+            btnUse.setEnabled(handler.getGameController().canUse(item));
+            listInventory.setToolTipText(handler.getGameController().getOccupantDescription(item));
+        }
+    }
+
+    private void btnCountActionPerformed(ActionEvent evt) {
+        handler.getGameController().countKiwi();
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -533,19 +536,8 @@ public class Display implements GameEventListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-       
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            handler.getGameController().playerMove(MoveDirection.NORTH);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_S) {
-            handler.getGameController().playerMove(MoveDirection.SOUTH);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_A) {
-            handler.getGameController().playerMove(MoveDirection.WEST);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_D) {
-            handler.getGameController().playerMove(MoveDirection.EAST);
-        }
+        handler.getGameController().getPlayer().move(e);
+        
     }
 
     @Override

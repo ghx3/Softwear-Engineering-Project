@@ -13,12 +13,7 @@ public class Tile {
     public static Tile waterTile = new WaterTile (Terrain.FOREST.WATER.getCode());
     public static Tile scrubTile = new ScrubTile (Terrain.SCRUB.getCode());
     public static Tile wetLandTile = new WetLand (Terrain.WETLAND.getCode());
-    
-    
-    public  static  int TILE_WIDTH = 64;
-    public  static int  TILE_HEIGTH = 64;
-    
-    
+ 
     
     protected BufferedImage texture;
     protected final int id;
@@ -41,7 +36,7 @@ public class Tile {
     
     public void render(Graphics g, int x, int y){
         
-        g.drawImage(texture, x, y, TILE_WIDTH,TILE_HEIGTH, null);
+        g.drawImage(texture, x, y, Game.TILE_WIDTH, Game.TILE_HEIGTH, null);
     }
     
     public boolean isSolid(){

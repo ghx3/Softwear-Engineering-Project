@@ -9,6 +9,9 @@ import java.awt.image.BufferedImage;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
 
 public class Game implements Runnable {
+
+    public static int TILE_HEIGTH = 64;
+    public static int TILE_WIDTH = 64;
     
     private Display display;
     private int width,height;
@@ -20,8 +23,7 @@ public class Game implements Runnable {
     private BufferStrategy bs;
     private Graphics g;
   
-    private KeyManager keyManager;
-    private GameController gameController;
+     private GameController gameController;
     
     private Handler handler;
        
@@ -30,21 +32,18 @@ public class Game implements Runnable {
         this.width = width;
         this.height = height;
         this.title = title;
-        keyManager = new KeyManager();
-        
+ 
     }    
     
     public void init(){
         handler = new Handler (this);
         gameController = new GameController( handler);
         display = new Display(title,width,height,handler);
-        //display.getFrame().addKeyListener(keyManager);
         Assets.Init();
             
     }
     
     private void tick(){
-        //keyManager.tick();
         gameController.tick();
     }
     
@@ -129,10 +128,7 @@ public class Game implements Runnable {
     public int getHeight() {
         return height;
     }
-    public KeyManager getKeyManager(){
-        return keyManager;
-    }
-
+ 
     public GameController getGameController() {
         return gameController;
     }

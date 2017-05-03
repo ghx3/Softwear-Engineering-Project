@@ -15,7 +15,7 @@ public class Island
     private final int numRows;
     private final int numColumns;
     private GridSquare[][] islandGrid;
-    private Position previousPlayerPos;
+    public Position previousPlayerPos;
 
    
     /**
