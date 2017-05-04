@@ -8,6 +8,6 @@ package nz.ac.aut.ense701.gameModel.Utils;
  */
 public enum GameState
 {
-    PLAYING, WON, LOST;
+    MENU,PLAYING, WON, LOST;
 
 }

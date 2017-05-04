@@ -3,6 +3,7 @@ package nz.ac.aut.ense701.gameModel.Entity;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.math.BigDecimal;
 import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
 import java.util.Collection;
@@ -29,7 +30,6 @@ public class Player extends Occupant {
     public static final int DEFAULT_PLAYER_WIDTH = 32;
     public static final int DEFAULT_PLAYER_HEIGHT = 32;
 
-
     public static final double MOVE_STAMINA = 1.0;
 
     private final double maxStamina;
@@ -42,7 +42,6 @@ public class Player extends Occupant {
     private MoveDirection direction;
     private float speed = 5.0f;
     private float xMove, yMove;
-
 
     public void setDirection(MoveDirection direction) {
         this.direction = direction;
@@ -69,24 +68,29 @@ public class Player extends Occupant {
         this.maxBackpackSize = maxBackpackSize;
         this.alive = true;
         this.backpack = new HashSet<Item>();
+
+    }
+
+    public void setXY() {
         xMove = position.getRow() * Game.TILE_WIDTH;
         yMove = position.getColumn() * Game.TILE_HEIGTH;
-     
-        
-        
     }
-         
+
     public void move(KeyEvent e) {
 
-        
         boolean movedTiles = false;
-        int cX = (int) xMove / Game.TILE_WIDTH;
-        int cY = (int) yMove / Game.TILE_HEIGTH;
+        float currentX =  (xMove / Game.TILE_WIDTH);
+        float currentY =  (yMove / Game.TILE_HEIGTH);
+
+        int cX = Integer.parseInt(Double.toString(currentX).substring(0, 1));
+        int cY = Integer.parseInt(Double.toString(currentY).substring(0, 1));
+        
         if ((cX != position.getRow()) || (cY != position.getColumn())) {
-//            System.out.println("Current X = " + pos.getRow() + "  Current Y = " + pos.getColumn());
-//            System.out.println("cx = " + cX + "  cY = " + cY);
-//            System.out.println("xMove = " + xMove + "  yMove = " + yMove);
-//            System.out.println();
+            System.out.println("Current POSX = " + position.getRow() + "  Current POSY = " + position.getColumn());
+            System.out.println("Current X = " +currentX + "  Current Y = " +currentY);
+            System.out.println("cx = " + cX + "  cY = " + cY);
+            System.out.println("xMove = " + xMove + "  yMove = " + yMove);
+            
             movedTiles = true;
         }
 
@@ -118,7 +122,8 @@ public class Player extends Occupant {
                 handler.getGameController().playerMove(MoveDirection.EAST);
             }
         }
-
+        System.out.println("Updated POSX = " + position.getRow() + "  Current POSY = " + position.getColumn());
+        System.out.println();
     }
 
     /**
@@ -398,12 +403,12 @@ public class Player extends Occupant {
 
     //GEts the picture corresponding to the direction player is headig to. This method will be used for animation in the future
     private BufferedImage getCurrentAnimation() {
-    
+
         if (direction == MoveDirection.WEST) {
-          
+
             return Assets.player_left[1];
         } else if (direction == MoveDirection.EAST) {
-         
+
             return Assets.player_right[1];
         }
         if (direction == MoveDirection.NORTH) {
@@ -414,6 +419,6 @@ public class Player extends Occupant {
             return Assets.player_down[1];
 
         }
-        
+
     }
 }

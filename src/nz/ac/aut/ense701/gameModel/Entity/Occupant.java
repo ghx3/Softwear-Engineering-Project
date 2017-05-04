@@ -106,8 +106,8 @@ public abstract class Occupant
     public abstract String getStringRepresentation();
 
     public void render(Graphics g){
-        int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_OCCUPANT_WIDTH)/2;
-        int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_OCCUPANT_HEIGHT)/2; 
+        int xOffset= (Game.TILE_WIDTH - DEFAULT_OCCUPANT_WIDTH)/2;
+        int yOffset = (Game.TILE_HEIGTH - DEFAULT_OCCUPANT_HEIGHT)/2; 
         
         g.drawImage(Assets.bindImage(name), (int)getPosition().getRow()* Game.TILE_WIDTH + xOffset
                , (int)getPosition().getColumn()* Game.TILE_HEIGTH + yOffset, 

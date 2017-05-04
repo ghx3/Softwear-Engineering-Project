@@ -27,6 +27,8 @@ import nz.ac.aut.ense701.gameModel.Entity.Tool;
 import nz.ac.aut.ense701.gameModel.Map.GridSquare;
 import nz.ac.aut.ense701.gameModel.Map.WorldCreator;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
+import static nz.ac.aut.ense701.main.Game.TILE_HEIGTH;
+import static nz.ac.aut.ense701.main.Game.TILE_WIDTH;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state and
@@ -54,9 +56,8 @@ public class GameController {
     private int totalKiwis;
     private int predatorsTrapped;
     private Set<GameEventListener> eventListeners;
+
     private Handler handler;
-    private int tileSizeX;
-    private int tileSizeY;
 
     private final double MIN_REQUIRED_CATCH = 0.8;
 
@@ -86,14 +87,11 @@ public class GameController {
         totalKiwis = world.getTotalKiwis();
         predatorsTrapped = 0;
         kiwiCount = 0;
-
+        
         player = world.getPlayer();
         island = world.getIsland();
         drawIsland();
-
-        tileSizeX = handler.getWidth() / island.getNumRows();
-        tileSizeY = handler.getHeight() / island.getNumColumns();
-
+        
         state = GameState.PLAYING;
         winMessage = "";
         loseMessage = "";
@@ -102,45 +100,13 @@ public class GameController {
     }
 
     public void tick() {
-        Game.TILE_HEIGTH = getTileSizeY();
-        Game.TILE_WIDTH = getTileSizeX();
-        //player.tick();
+         
+         
     }
 
     public void render(Graphics g) {
 
-        for (int y = 0; y < getNumColumns(); y++) {
-            for (int x = 0; x < getNumRows(); x++) {
-                Position position = new Position(island, x, y);
-
-                Tile t = Tile.tiles[island.getTerrain(position).getCode()];
-                if (t == null) {
-                    Tile.sandTile.render(g, x * Game.TILE_WIDTH, y * Game.TILE_HEIGTH);;
-                } else {
-                    t.render(g, x * Game.TILE_WIDTH, y * Game.TILE_HEIGTH);
-                }
-
-                GridSquare square = handler.getIsland().getGridSquare(position);
-                if (!square.isVisible() && !island.hasPlayer(position)) {
-                    Color color = g.getColor();
-                    g.setColor(new Color (100, 100, 100, 150));
-                    g.fillRect(position.getRow() * Game.TILE_WIDTH,
-                            position.getColumn() * Game.TILE_HEIGTH,
-                            Game.TILE_WIDTH, Game.TILE_HEIGTH);
-//                    g.setColor(color);
-                } else {
-
-                    Occupant[] occupants = island.getOccupants(position);
-                    for (Occupant occ : occupants) {
-                        occ.render(g);
-
-                    }
-                    if (island.hasPlayer(position)) {
-                        
-                    }
-                }
-            }
-        }
+        island.render(g);
         player.render(g);
 
     }
@@ -437,32 +403,6 @@ public class GameController {
      * Accessor methods for game data
      * **********************************************************************************************************************
      */
-    public int getTileSizeY() {
-        return tileSizeY;
-    }
-
-    public int getTileSizeX() {
-        return tileSizeX;
-    }
-
-    /**
-     * Get number of rows on island
-     *
-     * @return number of rows.
-     */
-    public int getNumRows() {
-        return island.getNumRows();
-    }
-
-    /**
-     * Get number of columns on island
-     *
-     * @return number of columns.
-     */
-    public int getNumColumns() {
-        return island.getNumColumns();
-    }
-
     /**
      * Gets the current state of the game.
      *

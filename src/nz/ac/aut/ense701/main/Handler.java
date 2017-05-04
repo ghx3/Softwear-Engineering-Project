@@ -21,14 +21,6 @@ public class Handler {
         this.game = game;
     }
 
-    public int getWorldWidthSize() {
-        return island.getNumRows() * getGameController().getTileSizeX();
-    }
-
-    public int getWorldHeightSize() {
-        return island.getNumColumns() * getGameController().getTileSizeY();
-    }
-
     public int getWidth() {
         return this.game.getWidth();
     }
@@ -44,14 +36,6 @@ public class Handler {
     public GameController getGameController() {
         return game.getGameController();
     }
-
-    //not used atm
-//    public KeyManager getKeyManager() {
-//        if(this.game.getKeyManager() == null){
-//            return null;
-//        }
-//        return this.game.getKeyManager();
-//    }
 
     public Island getIsland() {
         return island;

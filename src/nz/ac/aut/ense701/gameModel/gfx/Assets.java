@@ -20,11 +20,14 @@ public class Assets {
             crab, fall, stoat;
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
+    
+    public static BufferedImage background;
 
-    private static HashMap<String, BufferedImage> images;
+    public static HashMap<String, BufferedImage> images;
 
     public static void Init() {
-
+        
+        background = ImageLoader.loadImage("/kiwi.jpg");
         images = new HashMap();
 
         SpriteSheet terrain = new SpriteSheet(ImageLoader.loadImage("/textures/terrain.png"));
