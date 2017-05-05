@@ -15,7 +15,11 @@ public enum Terrain
     FOREST("*", 2.0,1),
     WETLAND ("#", 2.5,2),
     SCRUB("^", 3.0,3),
-    WATER("~", 4.0,4);
+    WATER("~", 4.0,4),
+    DIRT("1",1.0,5),
+    GRASS("2",1.0,6),
+    ROCK("0",2.0,7),
+    TREE("3",2.0,8);
     
     private final double difficulty;
     private final String stringRep;

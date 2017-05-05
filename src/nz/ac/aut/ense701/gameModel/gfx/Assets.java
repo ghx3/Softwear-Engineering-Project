@@ -12,7 +12,8 @@ public class Assets {
     public static int width = 110;
     public static int height = 126;
 
-    public static BufferedImage playerSingle, sand, scrub, wetland, water, forest;
+    public static BufferedImage playerSingle, sand, scrub, wetland, water, forest, dirt, grass, stone, tree;
+    ;
 
     public static BufferedImage fernbird,
             heron, tui, robin, kiwi, apple, muesliBar, orangeJuice, sandwich, trap,
@@ -20,14 +21,15 @@ public class Assets {
             crab, fall, stoat;
 
     public static BufferedImage[] player_down, player_up, player_left, player_right;
-    
+
     public static BufferedImage background;
 
     public static HashMap<String, BufferedImage> images;
 
     public static void Init() {
-        
+
         background = ImageLoader.loadImage("/kiwi.jpg");
+
         images = new HashMap();
 
         SpriteSheet terrain = new SpriteSheet(ImageLoader.loadImage("/textures/terrain.png"));
@@ -39,7 +41,7 @@ public class Assets {
 
         width = 32;
         height = 32;
-        
+
         player_down = new BufferedImage[2];
         player_up = new BufferedImage[2];
         player_left = new BufferedImage[2];
@@ -55,6 +57,10 @@ public class Assets {
         player_right[1] = player.crop(width * 5, height, width, height);
         player_left[0] = player.crop(width * 6, height, width, height);
         player_left[1] = player.crop(width * 7, height, width, height);
+        dirt = player.crop(width, 0, width, height);
+        grass = player.crop(width * 2, 0, width, height);
+        stone = player.crop(width * 3, 0, width, height);
+        tree = player.crop(0, 0, width, height);
 
         width = 80;
         height = 80;
@@ -96,66 +102,39 @@ public class Assets {
 //         = occupants.crop(4*width, 4*height, width, height);
 
         //Add to hashmap
-        images.put(
-                "Player", playerSingle);
-        images.put(
-                "Sand", sand);
-        images.put(
-                "Water", water);
-        images.put(
-                "Scrub", scrub);
-        images.put(
-                "Wetland", wetland);
-        images.put(
-                "Forest", forest);
-        images.put(
-                "Fernbird", fernbird);
-        images.put(
-                "Heron", heron);
-        images.put(
-                "Tui", tui);
-        images.put(
-                "Robin", robin);
-        images.put(
-                "Kiwi", kiwi);
-        images.put(
-                "Apple", apple);
-        images.put(
-                "MuesliBar", muesliBar);
-        images.put(
-                "Orange Juice", orangeJuice);
-        images.put(
-                "Sandwich", sandwich);
-        images.put(
-                "Trap", trap);
-        images.put(
-                "Sun", sun);
-        images.put(
-                "Pond", pond);
-        images.put(
-                "Cliff", cliff);
-        images.put(
-                "Rock", rock);
-        images.put(
-                "BrokenTrap", brokenTrap);
-        images.put(
-                "Possum", possum);
-        images.put(
-                "Cat", cat);
-        images.put(
-                "Rat", rat);
-        images.put(
-                "Kiore", kiore);
-        images.put(
-                "Screwdriver", tool);
-        images.put(
-                "Oystercatcher", oystercatcher);
-        images.put(
-                "Crab", crab);
-        images.put(
-                "Fall", fall);
-        images.put(
-                "Stoat", stoat);
+        images.put("Player", playerSingle);
+        //Animal
+        images.put("Fernbird", fernbird);
+        images.put("Heron", heron);
+        images.put("Tui", tui);
+        images.put("Robin", robin);
+        images.put("Kiwi", kiwi);
+        images.put("Cat", cat);
+        images.put("Rat", rat);
+        images.put("Kiore", kiore);
+        images.put("Possum", possum);
+        images.put("Stoat", stoat);
+        images.put("Oystercatcher", oystercatcher);
+        images.put("Crab", crab);
+        
+        //Food
+        images.put("Apple", apple);
+        images.put("MuesliBar", muesliBar);
+        images.put("OrangeJuice", orangeJuice);
+        images.put("Sandwich", sandwich);
+        
+        //tools
+        images.put("Screwdriver", tool);
+        images.put("Trap", trap);
+        images.put("BrokenTrap", brokenTrap);
+        
+        //Hazard
+        images.put("Sunburn", sun);
+        images.put("Pond", pond);
+        images.put("Cliff", cliff);
+        images.put("Rock", rock);
+        images.put("Fall", fall);
+        
     }
 
     public static BufferedImage bindImage(String name) {

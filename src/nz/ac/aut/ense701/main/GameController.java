@@ -87,11 +87,11 @@ public class GameController {
         totalKiwis = world.getTotalKiwis();
         predatorsTrapped = 0;
         kiwiCount = 0;
-        
+
         player = world.getPlayer();
         island = world.getIsland();
         drawIsland();
-        
+
         state = GameState.PLAYING;
         winMessage = "";
         loseMessage = "";
@@ -100,8 +100,7 @@ public class GameController {
     }
 
     public void tick() {
-         
-         
+
     }
 
     public void render(Graphics g) {
@@ -451,9 +450,15 @@ public class GameController {
         if ((newPosition != null) && newPosition.isOnIsland()) {
             // what is the terrain at that new position?
             Terrain newTerrain = island.getTerrain(newPosition);
-            // can the playuer do it?
-            isMovePossible = player.hasStaminaToMove(newTerrain)
-                    && player.isAlive();
+            Tile t = Tile.tiles[newTerrain.getCode()];
+            if (t.isSolid()) {
+                isMovePossible = false;
+            } else {
+                // can the playuer do it?
+                isMovePossible = player.hasStaminaToMove(newTerrain)
+                        && player.isAlive();
+            }
+
         }
         return isMovePossible;
     }

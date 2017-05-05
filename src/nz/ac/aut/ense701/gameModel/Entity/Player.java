@@ -78,6 +78,32 @@ public class Player extends Occupant {
 
     public void move(KeyEvent e) {
 
+        if (e.getKeyCode() == KeyEvent.VK_W) {
+
+            setDirection(MoveDirection.NORTH);
+
+            handler.getGameController().playerMove(MoveDirection.NORTH);
+
+        }
+        if (e.getKeyCode() == KeyEvent.VK_S) {
+
+            setDirection(MoveDirection.SOUTH);
+
+            handler.getGameController().playerMove(MoveDirection.SOUTH);
+
+        }
+        if (e.getKeyCode() == KeyEvent.VK_A) {
+            setDirection(MoveDirection.WEST);
+            handler.getGameController().playerMove(MoveDirection.WEST);
+
+        }
+        if (e.getKeyCode() == KeyEvent.VK_D) {
+            setDirection(MoveDirection.EAST);
+            handler.getGameController().playerMove(MoveDirection.EAST);
+
+        }
+
+        /*
         boolean movedTiles = false;
         float currentX =  (xMove / Game.TILE_WIDTH);
         float currentY =  (yMove / Game.TILE_HEIGTH);
@@ -124,6 +150,7 @@ public class Player extends Occupant {
         }
         System.out.println("Updated POSX = " + position.getRow() + "  Current POSY = " + position.getColumn());
         System.out.println();
+         */
     }
 
     /**
@@ -391,14 +418,13 @@ public class Player extends Occupant {
     }
 
     public void render(Graphics g) {
-//        int xOffset= (handler.getGameController().getTileSizeX() - DEFAULT_PLAYER_WIDTH)/2;
-//        int yOffset = (handler.getGameController().getTileSizeY() - DEFAULT_PLAYER_HEIGHT)/2; 
-//        
-//        g.drawImage(getCurrentAnimation(), (int)getPosition().getRow()* Tile.TILE_WIDTH + xOffset
-//               , (int)getPosition().getColumn()* Tile.TILE_HEIGTH + yOffset, 
-//               DEFAULT_PLAYER_WIDTH,DEFAULT_PLAYER_HEIGHT, null);
-        g.drawImage(getCurrentAnimation(), (int) xMove, (int) yMove,
+        int xOffset = (Game.TILE_WIDTH - DEFAULT_PLAYER_WIDTH) / 2;
+        int yOffset = (Game.TILE_HEIGTH - DEFAULT_PLAYER_HEIGHT) / 2;
+
+        g.drawImage(getCurrentAnimation(), (int) getPosition().getRow() * Game.TILE_WIDTH + xOffset, (int) getPosition().getColumn() * Game.TILE_HEIGTH + yOffset,
                 DEFAULT_PLAYER_WIDTH, DEFAULT_PLAYER_HEIGHT, null);
+        
+        //g.drawImage(getCurrentAnimation(), (int) xMove, (int) yMove, DEFAULT_PLAYER_WIDTH, DEFAULT_PLAYER_HEIGHT, null);
     }
 
     //GEts the picture corresponding to the direction player is headig to. This method will be used for animation in the future
