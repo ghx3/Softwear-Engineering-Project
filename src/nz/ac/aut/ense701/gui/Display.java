@@ -28,8 +28,6 @@ import javax.swing.event.ListSelectionEvent;
 import nz.ac.aut.ense701.gameModel.Utils.GameEventListener;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
-import static nz.ac.aut.ense701.gui.KiwiIslandUI.height;
-import static nz.ac.aut.ense701.gui.KiwiIslandUI.width;
 import nz.ac.aut.ense701.main.GameController;
 import nz.ac.aut.ense701.main.Handler;
 

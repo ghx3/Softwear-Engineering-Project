@@ -33,7 +33,7 @@ import nz.ac.aut.ense701.main.Game;
  */
 public class MainMenu extends JPanel {
 
-    private JButton newGameButton;
+    private JButton newGameButton, settings;
     private JButton highscoreButton;
     private JButton exitButton;
     private JLabel titleLabel;
@@ -59,6 +59,7 @@ public class MainMenu extends JPanel {
 
         //create the buttons
         newGameButton = new JButton("New Game");
+        settings = new JButton("Settings");
         highscoreButton = new JButton("High Score");
         exitButton = new JButton("Exit Game");
         titleLabel = new JLabel("Kiwi Island");
@@ -67,13 +68,15 @@ public class MainMenu extends JPanel {
 
         //set the size and position of the components
         titleLabel.setBounds(width / 2 - 100, 30, 200, 100);
-        newGameButton.setBounds(width / 2 - 100, 250, 200, 70);
+        newGameButton.setBounds(width / 2 - 100, 150, 200, 70);
+        settings.setBounds(width / 2 - 100, 250, 200, 70);
         highscoreButton.setBounds(width / 2 - 100, 350, 200, 70);
         exitButton.setBounds(width / 2 - 100, 450, 200, 70);
 
         //add the components to the panel
         menuPane.add(titleLabel);
         menuPane.add(newGameButton);
+        menuPane.add(settings);
         menuPane.add(highscoreButton);
         menuPane.add(exitButton);
 
@@ -85,6 +88,20 @@ public class MainMenu extends JPanel {
                 //frame.getContentPane().remove(menuPane);
                 Game.state = GameState.PLAYING;
                 menuPane.setVisible(false);
+
+            }
+        }
+        );
+        settings.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }
+        );
+        highscoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
             }
         }

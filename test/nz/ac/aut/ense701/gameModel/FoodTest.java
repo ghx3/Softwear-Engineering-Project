@@ -1,7 +1,8 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.Entity.Food;
 import nz.ac.aut.ense701.gameModel.Map.Island;
-import nz.ac.aut.ense701.gameModel.Entity.Static.Food;
+import nz.ac.aut.ense701.gameModel.Map.Position;
 import org.junit.Test;
 
 /**

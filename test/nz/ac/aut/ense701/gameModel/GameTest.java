@@ -1,14 +1,10 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.Entity.Player;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.Map.Island;
-import nz.ac.aut.ense701.gameModel.Entity.Static.Tool;
-import nz.ac.aut.ense701.gameModel.Entity.creature.Predator;
-import nz.ac.aut.ense701.gameModel.Entity.creature.Player;
-import nz.ac.aut.ense701.gameModel.Entity.Static.Item;
-import nz.ac.aut.ense701.gameModel.Entity.Static.Hazard;
-import nz.ac.aut.ense701.gameModel.Entity.Static.Food;
+import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.main.GameController;
 import org.junit.Test;
 
@@ -42,7 +38,7 @@ public class GameTest extends junit.framework.TestCase
     {
         // Create a new game from the data file.
         // Player is in position 2,0 & has 100 units of stamina
-        game           = new GameController();
+        game = new GameController();
         playerPosition = game.getPlayer().getPosition();
         player         = game.getPlayer();
         island = game.getIsland();
