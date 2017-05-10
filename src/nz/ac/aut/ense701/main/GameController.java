@@ -64,6 +64,29 @@ public class GameController {
     private String winMessage = "";
     private String loseMessage = "";
     private String playerMessage = "";
+    
+    //for test purpose
+     public GameController(Handler handler,WorldCreator world) {
+        this.handler = handler;
+        eventListeners = new HashSet<GameEventListener>();
+       
+        this.handler.setIsland(world.getIsland());
+
+        totalPredators = world.getTotalPredators();
+        totalKiwis = world.getTotalKiwis();
+        predatorsTrapped = 0;
+        kiwiCount = 0;
+
+        player = world.getPlayer();
+        island = world.getIsland();
+        drawIsland();
+
+        state = GameState.PLAYING;
+        winMessage = "";
+        loseMessage = "";
+        playerMessage = "";
+        notifyGameEventListeners();
+    }
 
     /**
      * A new instance of Kiwi island that reads data from "IslandData.txt".

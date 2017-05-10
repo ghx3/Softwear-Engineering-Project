@@ -1,3 +1,7 @@
+/**
+ * in order to perform this test the Test.txt text file should be used as a ma
+ */
+
 package nz.ac.aut.ense701.gameModel;
 
 import nz.ac.aut.ense701.gameModel.Entity.Food;
@@ -11,6 +15,7 @@ import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.Map.Island;
 import nz.ac.aut.ense701.gameModel.Map.Position;
+import nz.ac.aut.ense701.gameModel.Map.WorldCreator;
 import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.GameController;
 import nz.ac.aut.ense701.main.Handler;
@@ -47,11 +52,12 @@ public class GameTest extends junit.framework.TestCase
     @Override
     protected void setUp()
     {   
-         game = new Game("Title",800,640);
-         handler = new Handler(game);
+        game = new Game("Title",800,640);
+        handler = new Handler(game);
+        WorldCreator world = new WorldCreator(handler, "test.txt");
         // Create a new game from the data file.
         // Player is in position 2,0 & has 100 units of stamina
-        gameController = new GameController(handler);
+        gameController = new GameController(handler,world);
         playerPosition = gameController.getPlayer().getPosition();
         player         = gameController.getPlayer();
         island = gameController.getIsland();
@@ -329,13 +335,6 @@ public class GameTest extends junit.framework.TestCase
     }
     
     @Test
-    public void testUseItemTrapFinalPredator(){
-        
-        assertTrue("Check player moves", trapAllPredators());
-        assertTrue("Game should be won", gameController.getState()== GameState.WON);    
-    }
-    
-    @Test
     public void testUseItemBrokenTrap(){
         Tool trap = new Tool(playerPosition,"Trap", "Rat trap",1.0, 1.0);
         player.collect(trap);
@@ -366,8 +365,11 @@ public class GameTest extends junit.framework.TestCase
    
     @Test
     public void testPlayerMoveToInvalidPosition(){
+        Position prevPosition= player.getPosition();
+        gameController.getPlayer().setPosition(new Position(island,0,0));
         //A move NORTH would be invalid from player's start position
         assertFalse("Move not valid", gameController.playerMove(MoveDirection.NORTH));
+        gameController.getPlayer().setPosition(prevPosition);
     }
  
     @Test
@@ -445,82 +447,21 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testCountKiwi()
-    {
+    {   
+        Position prevPosition= player.getPosition();
+        gameController.getPlayer().setPosition(new Position(island,0,0));
         //Need to move to a place where there is a kiwi
-        assertTrue (" This move valid", playerMoveEast(5));
+        assertTrue (" This move valid", playerMoveSouth(7));
         gameController.countKiwi();
         assertEquals("Wrong count", gameController.getKiwiCount(), 1);
+        gameController.getPlayer().setPosition(prevPosition);
     }
 
 /**
  * Private helper methods
  */
     
-    private boolean trapAllPredators()
-    {
-        
-        //Firstly player needs a trap
-        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",gameController.getPlayer().getPosition().getRow(), 
-                gameController.getPlayer().getPosition().getColumn());
-        gameController.collectItem(trap);
-        
-        //Now player needs to trap all predators
-        //Predator 1
-        boolean moveOK = playerMoveEast(5);
-        gameController.useItem(trap);
-        //Predator 2
-        if(moveOK){
-            moveOK = playerMoveWest(1);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(2);
-            gameController.useItem(trap);
-        }
-        //Predator 3
-        if(moveOK){
-            moveOK = playerMoveWest(2);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            gameController.useItem(trap);
-        }
-        //Predator 4
-        if(moveOK){
-            moveOK = playerMoveWest(3);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            gameController.useItem(trap);
-        }
-        //Predator 5
-        if(moveOK){
-            moveOK = playerMoveEast(1);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            gameController.useItem(trap);
-        }
-         //Predator 6
-        if(moveOK){
-            moveOK = playerMoveEast(2);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(1);
-            gameController.useItem(trap);
-        }
-        //Predator 7
-        if(moveOK){
-            moveOK = playerMoveNorth(1);
-        }
-        if(moveOK){
-            moveOK = playerMoveEast(3);
-        }
-        if(moveOK){
-            moveOK = playerMoveSouth(4);
-            gameController.useItem(trap);
-        }
-        return moveOK;
-    }
+  
     
     private boolean playerMoveNorth(int numberOfMoves)
     {

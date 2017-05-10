@@ -38,8 +38,7 @@ public class WorldCreator {
         this.handler = handler;
         initialiseIslandFromFile(path);
     }
-
-    /**
+   /**
      * Loads terrain and occupant data from a file. At this stage this method
      * assumes that the data file is correct and just throws an exception or
      * ignores it if it is not.
