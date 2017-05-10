@@ -35,7 +35,11 @@ public class Food extends Item
         this.energy = energy;
     }
 
-
+    public Food(Position pos, String name, String description, double weight, double size, double energy) 
+    {
+        super( pos, name, description,weight, size);
+        this.energy = energy;
+    }
     /**
      * Gets the energy of the food.
      * @return the energy of the food

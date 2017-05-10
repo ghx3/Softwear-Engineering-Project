@@ -1,7 +1,8 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import nz.ac.aut.ense701.gameModel.Map.Island;
+import nz.ac.aut.ense701.gameModel.Map.Position;
+import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import org.junit.Test;
 
 /**
@@ -170,8 +171,8 @@ public class PositionTest extends junit.framework.TestCase
     @Test
     public void testGetNewPositionValidDirection() {
         Position newPosition = onIsland.getNewPosition(MoveDirection.WEST);
-        assertEquals(newPosition.getRow(), 1);
-        assertEquals(newPosition.getColumn(), 1);
+        assertEquals(newPosition.getRow(), 0);
+        assertEquals(newPosition.getColumn(), 2);
     }
 
 }

@@ -70,6 +70,23 @@ public class Player extends Occupant {
         this.backpack = new HashSet<Item>();
 
     }
+     public Player( Position position, String name, double maxStamina,
+            double maxBackpackWeight, double maxBackpackSize) {
+
+        super( position, name, "Player");
+        this.maxStamina = maxStamina;
+        this.stamina = maxStamina;
+        this.maxBackpackWeight = maxBackpackWeight;
+        this.maxBackpackSize = maxBackpackSize;
+        this.alive = true;
+        this.backpack = new HashSet<Item>();
+
+    }
+     
+     //for test purposes
+    public void setPosition(Position pos){
+        this.position = pos;
+    }
 
     public void setXY() {
         xMove = position.getRow() * Game.TILE_WIDTH;

@@ -26,7 +26,13 @@ public abstract class Item extends Occupant {
         this.weight = weight;
         this.size = size;
     }
-
+    
+    //for test purposes
+     public Item( Position pos, String name, String description, double weight, double size) {
+        super(pos, name, description);
+        this.weight = weight;
+        this.size = size;
+    }
     /**
      * Gets the weight of the item
      *

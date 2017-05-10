@@ -1,8 +1,10 @@
 
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Map.Island;
-import nz.ac.aut.ense701.gameModel.Entity.creature.Predator;
+import nz.ac.aut.ense701.gameModel.Map.Position;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

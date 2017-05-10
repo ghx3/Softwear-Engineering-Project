@@ -1,10 +1,12 @@
 package nz.ac.aut.ense701.gameModel;
 
-import nz.ac.aut.ense701.gameModel.Map.Terrain;
+import nz.ac.aut.ense701.gameModel.Entity.Kiwi;
+import nz.ac.aut.ense701.gameModel.Entity.Player;
+import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Map.Island;
-import nz.ac.aut.ense701.gameModel.Entity.creature.Predator;
-import nz.ac.aut.ense701.gameModel.Entity.creature.Player;
-import nz.ac.aut.ense701.gameModel.Entity.creature.Kiwi;
+import nz.ac.aut.ense701.gameModel.Map.Position;
+import nz.ac.aut.ense701.gameModel.Map.Terrain;
+
 import org.junit.Test;
 
 /**

@@ -1,11 +1,19 @@
 package nz.ac.aut.ense701.gameModel;
 
+import nz.ac.aut.ense701.gameModel.Entity.Food;
+import nz.ac.aut.ense701.gameModel.Entity.Hazard;
+import nz.ac.aut.ense701.gameModel.Entity.Item;
 import nz.ac.aut.ense701.gameModel.Entity.Player;
+import nz.ac.aut.ense701.gameModel.Entity.Predator;
+import nz.ac.aut.ense701.gameModel.Entity.Tool;
+import nz.ac.aut.ense701.gameModel.Map.GridSquare;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.Map.Island;
 import nz.ac.aut.ense701.gameModel.Map.Position;
+import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.GameController;
+import nz.ac.aut.ense701.main.Handler;
 import org.junit.Test;
 
 /**
@@ -16,10 +24,13 @@ import org.junit.Test;
  */
 public class GameTest extends junit.framework.TestCase
 {
-    GameController       game;
+    GameController       gameController;
     Player     player;
     Position   playerPosition;
     Island island ;
+    Game game;
+    Handler handler;
+    
     
     /**
      * Default constructor for test class GameTest
@@ -35,13 +46,15 @@ public class GameTest extends junit.framework.TestCase
      */
     @Override
     protected void setUp()
-    {
+    {   
+         game = new Game("Title",800,640);
+         handler = new Handler(game);
         // Create a new game from the data file.
         // Player is in position 2,0 & has 100 units of stamina
-        game = new GameController();
-        playerPosition = game.getPlayer().getPosition();
-        player         = game.getPlayer();
-        island = game.getIsland();
+        gameController = new GameController(handler);
+        playerPosition = gameController.getPlayer().getPosition();
+        player         = gameController.getPlayer();
+        island = gameController.getIsland();
     }
 
     /**
@@ -99,12 +112,12 @@ public class GameTest extends junit.framework.TestCase
     
     @Test
     public void testGetNumRows(){
-        assertEquals("Check row number", game.getNumRows(), 10);
+        assertEquals("Check row number", island.getNumRows(), 10);
     }
     
     @Test
     public void testGetNumColumns(){
-        assertEquals("Check column number", game.getNumRows(), 10);
+        assertEquals("Check column number", island.getNumRows(), 10);
     }
     
     @Test
@@ -116,12 +129,12 @@ public class GameTest extends junit.framework.TestCase
 
     @Test
     public void testGetInitialState(){
-        assertEquals("Wrong initial state", game.getState(), GameState.PLAYING);
+        assertEquals("Wrong initial state", gameController.getState(), GameState.PLAYING);
     }
     
     @Test
     public void testGetPlayerValues(){
-        int[] values = game.getPlayerValues();
+        int[] values = gameController.getPlayerValues();
         assertEquals("Check Max backpack size.", values[GameController.MAXSIZE_INDEX], 5);    
         assertEquals("Check max stamina.", values[GameController.MAXSTAMINA_INDEX], 100);
         assertEquals("Check max backpack weight.", values[GameController.MAXWEIGHT_INDEX], 10);
@@ -133,34 +146,36 @@ public class GameTest extends junit.framework.TestCase
     @Test
     public void testIsPlayerMovePossibleValidMove(){
         //At start of game player has valid moves EAST, West & South
-        assertTrue("Move should be valid", game.isPlayerMovePossible(MoveDirection.SOUTH));
+        assertTrue("Move should be valid", gameController.isPlayerMovePossible(MoveDirection.SOUTH));
     }
     
     @Test
     public void testIsPlayerMovePossibleInvalidMove(){
+        
+        gameController.getPlayer().setPosition(new Position(island,0,0));
         //At start of game player has valid moves EAST, West & South
-        assertFalse("Move should not be valid", game.isPlayerMovePossible(MoveDirection.NORTH));
+        assertFalse("Move should not be valid", gameController.isPlayerMovePossible(MoveDirection.NORTH));
     }
     
     @Test
     public void testCanCollectCollectable(){
         //Items that are collectable and fit in backpack
         Item valid = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
-        assertTrue("Should be able to collect", game.canCollect(valid));
+        assertTrue("Should be able to collect", gameController.canCollect(valid));
     }
     
     @Test    
     public void testCanCollectNotCollectable(){
         //Items with size of '0' cannot be carried
         Item notCollectable = new Food(playerPosition,"Sandwich", "Very Heavy Sandwich",10.0, 0.0,1.0);
-        assertFalse("Should not be able to collect", game.canCollect(notCollectable));
+        assertFalse("Should not be able to collect", gameController.canCollect(notCollectable));
     }
     
     @Test
     public void testCanUseFoodValid(){
         //Food can always be used
         Item valid = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
-        assertTrue("Should be able to use", game.canUse(valid));
+        assertTrue("Should be able to use", gameController.canUse(valid));
     }
     
     @Test
@@ -170,7 +185,7 @@ public class GameTest extends junit.framework.TestCase
         //Add predator
         Predator rat = new Predator(playerPosition,"Rat", "A norway rat");
         island.addOccupant(playerPosition, rat);
-        assertTrue("Should be able to use", game.canUse(valid));
+        assertTrue("Should be able to use", gameController.canUse(valid));
     }
     
     @Test
@@ -178,7 +193,7 @@ public class GameTest extends junit.framework.TestCase
         //Trap can be used if there is a predator here
         Item tool = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
 
-        assertFalse("Should not be able to use", game.canUse(tool));
+        assertFalse("Should not be able to use", gameController.canUse(tool));
     }
     
     @Test
@@ -189,7 +204,7 @@ public class GameTest extends junit.framework.TestCase
         trap.setBroken();
         player.collect(trap);
 
-        assertTrue("Should be able to use", game.canUse(tool));
+        assertTrue("Should be able to use", gameController.canUse(tool));
     }
     
     @Test
@@ -199,7 +214,7 @@ public class GameTest extends junit.framework.TestCase
         Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
         trap.setBroken();
 
-        assertFalse("Should not be able to use", game.canUse(tool));
+        assertFalse("Should not be able to use", gameController.canUse(tool));
     }
     
     @Test
@@ -209,13 +224,13 @@ public class GameTest extends junit.framework.TestCase
         Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
         player.collect(trap);
 
-        assertFalse("Should not be able to use", game.canUse(tool));
+        assertFalse("Should not be able to use", gameController.canUse(tool));
     }
     
     @Test
     public void testGetKiwiCountInitial()
     {
-       assertEquals("Shouldn't have counted any kiwis yet",game.getKiwiCount(),0); 
+       assertEquals("Shouldn't have counted any kiwis yet",gameController.getKiwiCount(),0); 
     }
     /**
      * Test for mutator methods
@@ -226,7 +241,7 @@ public class GameTest extends junit.framework.TestCase
         Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
         island.addOccupant(playerPosition, food);
         assertTrue("Food now on island", island.hasOccupant(playerPosition, food));
-        game.collectItem(food);
+        gameController.collectItem(food);
         
         assertTrue("Player should have food",player.hasItem(food));
         assertFalse("Food should no longer be on island", island.hasOccupant(playerPosition, food));
@@ -237,7 +252,7 @@ public class GameTest extends junit.framework.TestCase
         Item notCollectable = new Food(playerPosition,"House", "Can't collect",1.0, 0.0,1.0);
         island.addOccupant(playerPosition, notCollectable);
         assertTrue("House now on island", island.hasOccupant(playerPosition, notCollectable));
-        game.collectItem(notCollectable);
+        gameController.collectItem(notCollectable);
         
         assertFalse("Player should not have house",player.hasItem(notCollectable));
         assertTrue("House should be on island", island.hasOccupant(playerPosition, notCollectable));
@@ -247,10 +262,10 @@ public class GameTest extends junit.framework.TestCase
     public void testDropValid(){
         Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
         island.addOccupant(playerPosition, food);
-        game.collectItem(food);
+        gameController.collectItem(food);
         assertTrue("Player should have food",player.hasItem(food));
         
-        game.dropItem(food);
+        gameController.dropItem(food);
         assertFalse("Player should no longer have food",player.hasItem(food));
         assertTrue("Food should be on island", island.hasOccupant(playerPosition, food));
     }
@@ -259,7 +274,7 @@ public class GameTest extends junit.framework.TestCase
     public void testDropNotValidPositionFull(){
         Item food = new Food(playerPosition,"Sandwich", "Yummy",1.0, 1.0,1.0);
         island.addOccupant(playerPosition, food);
-        game.collectItem(food);
+        gameController.collectItem(food);
         assertTrue("Player should have food",player.hasItem(food));
         
         //Positions can have at most three occupants
@@ -270,7 +285,7 @@ public class GameTest extends junit.framework.TestCase
         island.addOccupant(playerPosition, dummy2);
         island.addOccupant(playerPosition, dummy3);
         
-        game.dropItem(food);
+        gameController.dropItem(food);
         assertTrue("Player should have food",player.hasItem(food));
         assertFalse("Food should not be on island", island.hasOccupant(playerPosition, food));
     }
@@ -283,7 +298,7 @@ public class GameTest extends junit.framework.TestCase
         
         // Will only get a stamina increase if player has less than max stamina
         player.reduceStamina(5.0);
-        game.useItem(food);
+        gameController.useItem(food);
         assertFalse("Player should no longer have food",player.hasItem(food));
         assertEquals("Wrong stamina level", player.getStaminaLevel(), 96.3);
     }
@@ -294,7 +309,7 @@ public class GameTest extends junit.framework.TestCase
         assertTrue("Player should have food",player.hasItem(food));
         
         // Will only get a stamina increase if player has less than max stamina
-        game.useItem(food);
+        gameController.useItem(food);
         assertFalse("Player should no longer have food",player.hasItem(food));
         assertEquals("Wrong stamina level", player.getStaminaLevel(), 100.0);
     }  
@@ -308,7 +323,7 @@ public class GameTest extends junit.framework.TestCase
         // Can only use trap if there is a predator.
         Predator predator = new Predator(playerPosition,"Rat", "Norway rat");
         island.addOccupant(playerPosition, predator);
-        game.useItem(trap);
+        gameController.useItem(trap);
         assertTrue("Player should still have trap",player.hasItem(trap));
         assertFalse("Predator should be gone.", island.hasPredator(playerPosition));
     }
@@ -317,7 +332,7 @@ public class GameTest extends junit.framework.TestCase
     public void testUseItemTrapFinalPredator(){
         
         assertTrue("Check player moves", trapAllPredators());
-        assertTrue("Game should be won", game.getState()== GameState.WON);    
+        assertTrue("Game should be won", gameController.getState()== GameState.WON);    
     }
     
     @Test
@@ -330,7 +345,7 @@ public class GameTest extends junit.framework.TestCase
         Predator predator = new Predator(playerPosition,"Rat", "Norway rat");
         island.addOccupant(playerPosition, predator);
         trap.setBroken();
-        game.useItem(trap);
+        gameController.useItem(trap);
         assertTrue("Player should still have trap",player.hasItem(trap));
         assertTrue("Predator should still be there as trap broken.", island.hasPredator(playerPosition));
     }
@@ -345,26 +360,31 @@ public class GameTest extends junit.framework.TestCase
         player.collect(screwdriver);
         assertTrue("Player should have screwdriver",player.hasItem(screwdriver));
         
-        game.useItem(screwdriver);
+        gameController.useItem(screwdriver);
         assertFalse("Trap should be fixed", trap.isBroken());
     }
    
     @Test
     public void testPlayerMoveToInvalidPosition(){
         //A move NORTH would be invalid from player's start position
-        assertFalse("Move not valid", game.playerMove(MoveDirection.NORTH));
+        assertFalse("Move not valid", gameController.playerMove(MoveDirection.NORTH));
     }
  
     @Test
     public void testPlayerMoveValidNoHazards(){
-        double stamina = player.getStaminaLevel();  
-
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        double stamina = player.getStaminaLevel(); 
+        
+        Position prevPosition= player.getPosition();
+                
+        assertTrue("Move valid", gameController.playerMove(MoveDirection.SOUTH));
+       
+        GridSquare square = island.getGridSquare( player.getPosition());
+        
         //Stamina reduced by move
-        assertEquals("Wrong stamina", stamina - 3, player.getStaminaLevel());
-        Position newPos = game.getPlayer().getPosition();
-        assertEquals("Wrong position", newPos.getRow(), 1);
-        assertFalse("Player should not be here", game.hasPlayer(playerPosition.getRow(), playerPosition.getColumn()));
+        assertEquals("Wrong stamina", stamina - square.getTerrain().getDifficulty(), player.getStaminaLevel());
+        Position newPos = gameController.getPlayer().getPosition();
+        assertEquals("Wrong position", newPos.getColumn(), prevPosition.getColumn()+1);
+        assertFalse("Player should not be here", gameController.hasPlayer(playerPosition.getRow(), playerPosition.getColumn()));
     }
     
     @Test
@@ -373,16 +393,16 @@ public class GameTest extends junit.framework.TestCase
         Hazard fatal = new Hazard(hazardPosition, "Cliff", "Steep cliff", 1.0);
         island.addOccupant(hazardPosition, fatal);
         
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue("Move valid", gameController.playerMove(MoveDirection.EAST));
         //Fatal Hazard should kill player
         assertTrue("Player should be dead.", !player.isAlive());
-        assertTrue("Game should be over", game.getState()== GameState.LOST);
+        assertTrue("Game should be over", gameController.getState()== GameState.LOST);
     }
     
     @Test
     public void testPlayerMoveDeadPlayer(){
         player.kill();
-        assertFalse(game.playerMove(MoveDirection.SOUTH));
+        assertFalse(gameController.playerMove(MoveDirection.SOUTH));
     }
     
     @Test
@@ -392,10 +412,10 @@ public class GameTest extends junit.framework.TestCase
         Hazard fatal = new Hazard(hazardPosition, "Cliff", "Not so steep cliff", 0.5);
         island.addOccupant(hazardPosition, fatal);
         
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue("Move valid", gameController.playerMove(MoveDirection.EAST));
         //Non-fatal Hazard should reduce player stamina
         assertTrue("Player should be alive.", player.isAlive());
-        assertTrue("Game should not be over", game.getState()== GameState.PLAYING);
+        assertTrue("Game should not be over", gameController.getState()== GameState.PLAYING);
         assertEquals("Wrong stamina", (stamina-53), player.getStaminaLevel());
     }
     
@@ -406,10 +426,10 @@ public class GameTest extends junit.framework.TestCase
         island.addOccupant(hazardPosition, fatal);
         player.reduceStamina(47.0);
         
-        assertTrue("Move valid", game.playerMove(MoveDirection.SOUTH));
+        assertTrue("Move valid", gameController.playerMove(MoveDirection.EAST));
         //Non-fatal Hazard should reduce player stamina to less than zero
         assertFalse("Player should not be alive.", player.isAlive());
-        assertTrue("Game should be over", game.getState()== GameState.LOST);
+        assertTrue("Game should be over", gameController.getState()== GameState.LOST);
         assertEquals("Wrong stamina", 0.0, player.getStaminaLevel());
     }
     
@@ -418,9 +438,9 @@ public class GameTest extends junit.framework.TestCase
         // Reduce player's stamina to less than is needed for the most challenging move
         //Most challenging move is WEST as Terrain is water
         player.reduceStamina(97.0);
-        assertFalse("Player should not have required stamina", game.playerMove(MoveDirection.WEST));
+        assertFalse("Player should not have required stamina", gameController.playerMove(MoveDirection.WEST));
         //Game not over as there other moves player has enough stamina for
-        assertTrue("Game should not be over", game.getState()== GameState.PLAYING);
+        assertTrue("Game should not be over", gameController.getState()== GameState.PLAYING);
     }
     
     @Test
@@ -428,8 +448,8 @@ public class GameTest extends junit.framework.TestCase
     {
         //Need to move to a place where there is a kiwi
         assertTrue (" This move valid", playerMoveEast(5));
-        game.countKiwi();
-        assertEquals("Wrong count", game.getKiwiCount(), 1);
+        gameController.countKiwi();
+        assertEquals("Wrong count", gameController.getKiwiCount(), 1);
     }
 
 /**
@@ -438,21 +458,23 @@ public class GameTest extends junit.framework.TestCase
     
     private boolean trapAllPredators()
     {
+        
         //Firstly player needs a trap
-        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",1.0, 1.0);
-        game.collectItem(trap);
+        Tool trap = new Tool(playerPosition,"Trap", "A predator trap",gameController.getPlayer().getPosition().getRow(), 
+                gameController.getPlayer().getPosition().getColumn());
+        gameController.collectItem(trap);
         
         //Now player needs to trap all predators
         //Predator 1
         boolean moveOK = playerMoveEast(5);
-        game.useItem(trap);
+        gameController.useItem(trap);
         //Predator 2
         if(moveOK){
             moveOK = playerMoveWest(1);
         }
         if(moveOK){
             moveOK = playerMoveSouth(2);
-            game.useItem(trap);
+            gameController.useItem(trap);
         }
         //Predator 3
         if(moveOK){
@@ -460,7 +482,7 @@ public class GameTest extends junit.framework.TestCase
         }
         if(moveOK){
             moveOK = playerMoveSouth(1);
-            game.useItem(trap);
+            gameController.useItem(trap);
         }
         //Predator 4
         if(moveOK){
@@ -468,7 +490,7 @@ public class GameTest extends junit.framework.TestCase
         }
         if(moveOK){
             moveOK = playerMoveSouth(1);
-            game.useItem(trap);
+            gameController.useItem(trap);
         }
         //Predator 5
         if(moveOK){
@@ -476,7 +498,7 @@ public class GameTest extends junit.framework.TestCase
         }
         if(moveOK){
             moveOK = playerMoveSouth(1);
-            game.useItem(trap);
+            gameController.useItem(trap);
         }
          //Predator 6
         if(moveOK){
@@ -484,7 +506,7 @@ public class GameTest extends junit.framework.TestCase
         }
         if(moveOK){
             moveOK = playerMoveSouth(1);
-            game.useItem(trap);
+            gameController.useItem(trap);
         }
         //Predator 7
         if(moveOK){
@@ -495,7 +517,7 @@ public class GameTest extends junit.framework.TestCase
         }
         if(moveOK){
             moveOK = playerMoveSouth(4);
-            game.useItem(trap);
+            gameController.useItem(trap);
         }
         return moveOK;
     }
@@ -504,7 +526,7 @@ public class GameTest extends junit.framework.TestCase
     {
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
-            success = game.playerMove(MoveDirection.NORTH);
+            success = gameController.playerMove(MoveDirection.NORTH);
             if(!success)break;
             
         }
@@ -515,7 +537,7 @@ public class GameTest extends junit.framework.TestCase
     {
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
-            success = game.playerMove(MoveDirection.SOUTH);
+            success = gameController.playerMove(MoveDirection.SOUTH);
             if(!success)break;
             
         }
@@ -526,7 +548,7 @@ public class GameTest extends junit.framework.TestCase
     {
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
-            success = game.playerMove(MoveDirection.EAST);
+            success = gameController.playerMove(MoveDirection.EAST);
             if(!success)break;
             
         }
@@ -537,7 +559,7 @@ public class GameTest extends junit.framework.TestCase
     {
         boolean success = false;
         for (int i = 0; i < numberOfMoves; i++) {
-            success = game.playerMove(MoveDirection.WEST);
+            success = gameController.playerMove(MoveDirection.WEST);
             if(!success)break;
             
         }
