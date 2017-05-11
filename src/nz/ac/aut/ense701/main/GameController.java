@@ -55,6 +55,7 @@ public class GameController {
     private int totalPredators;
     private int totalKiwis;
     private int predatorsTrapped;
+    private int level;
     private Set<GameEventListener> eventListeners;
 
     private Handler handler;
@@ -94,7 +95,7 @@ public class GameController {
     public GameController(Handler handler) {
         this.handler = handler;
         eventListeners = new HashSet<GameEventListener>();
-
+        level = 1;
         createNewGame();
     }
 
@@ -102,8 +103,19 @@ public class GameController {
      * Starts a new game. At this stage data is being read from a text file
      */
     public void createNewGame() {
-
-        WorldCreator world = new WorldCreator(handler, "IslandData.txt");
+        WorldCreator world = null;
+        switch(level) {
+            case(1):
+                world = new WorldCreator(handler, "maps/1M.txt");
+                break;
+            case(2):
+                world = new WorldCreator(handler, "maps/2M.txt");
+                break;
+            case(3):
+                world = new WorldCreator(handler, "maps/3M.txt");
+                break;
+        }
+                
         handler.setIsland(world.getIsland());
 
         totalPredators = world.getTotalPredators();
@@ -297,11 +309,13 @@ public class GameController {
             state = GameState.WON;
             message = "You win! You have done an excellent job and trapped all the predators.";
             this.setWinMessage(message);
+            level++;
         } else if (kiwiCount == totalKiwis) {
             if (predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH) {
                 state = GameState.WON;
                 message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
                 this.setWinMessage(message);
+                level++;
             }
         }
         // notify listeners about changes
