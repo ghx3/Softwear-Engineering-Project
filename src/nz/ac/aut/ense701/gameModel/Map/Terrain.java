@@ -11,13 +11,13 @@ package nz.ac.aut.ense701.gameModel.Map;
  */
 public enum Terrain
 {
-    SAND(".", 1.0,0),
+    SAND("&", 1.0,0),
     FOREST("*", 2.0,1),
     WETLAND ("#", 2.5,2),
     SCRUB("^", 3.0,3),
     WATER("~", 4.0,4),
     DIRT("1",1.0,5),
-    GRASS("2",1.0,6),
+    GRASS("2",2.0,6),
     ROCK("0",2.0,7),
     TREE("3",2.0,8);
     
