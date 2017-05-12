@@ -68,7 +68,10 @@ public class GameController {
     
     //for test purpose
      public GameController(Handler handler,WorldCreator world) {
-        this.handler = handler;
+        
+         if(this.handler == null && handler!= null){
+             this.handler = handler;
+        }        
         eventListeners = new HashSet<GameEventListener>();
        
         this.handler.setIsland(world.getIsland());
