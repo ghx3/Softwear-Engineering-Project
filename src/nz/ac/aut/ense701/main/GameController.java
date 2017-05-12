@@ -68,10 +68,8 @@ public class GameController {
     
     //for test purpose
      public GameController(Handler handler,WorldCreator world) {
-        
-         if(this.handler == null && handler!= null){
-             this.handler = handler;
-        }        
+        this.handler = handler;
+          
         eventListeners = new HashSet<GameEventListener>();
        
         this.handler.setIsland(world.getIsland());
@@ -93,7 +91,7 @@ public class GameController {
     }
 
     /**
-     * A new instance of Kiwi island that reads data from "IslandData.txt".
+     * A new instance of Kiwi island that reads data from "someMap.txt".
      */
     public GameController(Handler handler) {
         this.handler = handler;

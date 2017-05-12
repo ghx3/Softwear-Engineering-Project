@@ -104,7 +104,7 @@ public class GridSquareTest extends junit.framework.TestCase
     
     @Test
     public void testGetTerrainString(){
-        assertEquals(emptySquare.getTerrainStringRepresentation(), ".");
+        assertEquals(emptySquare.getTerrainStringRepresentation(), "&");
     }
     @Test
     public void testHasPlayerNoPlayer() {

@@ -54,7 +54,7 @@ public class GameTest extends junit.framework.TestCase
     {   
         game = new Game("Title",800,640);
         handler = new Handler(game);
-        WorldCreator world = new WorldCreator(handler, "test.txt");
+        WorldCreator world = new WorldCreator(handler, "res/World/TestMap.txt");
         // Create a new game from the data file.
         // Player is in position 2,0 & has 100 units of stamina
         gameController = new GameController(handler,world);

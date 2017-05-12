@@ -1,4 +1,4 @@
-This file describes the text in the data file for the Kiwi Island game
+This file describes the maps text in the data file for the Kiwi Island game
 =======================================================================
 
 The files contains the following data items in the order listed
@@ -8,7 +8,16 @@ int Number of columns,
 
 Island 2D terrain description:
 "Number of rows" rows with a string of length "Number of columns", each line terminated with ","
-"."=Sand, "*"=Forest, "#"=Wetland, "^"=Scrub, "~"=Water
+
+SAND = "&",
+FOREST = "*",
+WETLAND = "#", 
+SCRUB = "^",
+WATER = "~",
+DIRT = "1",
+GRASS = "2",
+ROCK = "0",
+TREE = "3",
 
 Player details: 
 name [String], maximum stamina level [double], start position row [int], start position column [int], maximum backpack weight [double], maximum backpack size [double],
