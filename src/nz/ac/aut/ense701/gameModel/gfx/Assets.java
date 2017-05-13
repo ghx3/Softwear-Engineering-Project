@@ -33,7 +33,6 @@ public class Assets {
         images = new HashMap();
 
         SpriteSheet terrain = new SpriteSheet(ImageLoader.loadImage("/textures/terrain.png"));
-        playerSingle = ImageLoader.loadImage("/textures/player1.png");
         sand = terrain.crop(5, 5, width - 8, height - 10);
         water = terrain.crop(2 * width, 5, width - 2, height - 10);
         scrub = terrain.crop(width + 2, 5, width - 5, height - 12);
