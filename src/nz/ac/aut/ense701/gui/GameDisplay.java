@@ -26,6 +26,7 @@ import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
+import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.GameController;
 import nz.ac.aut.ense701.main.Handler;
 
@@ -59,7 +60,7 @@ public class GameDisplay extends Thread{
     private timetask mytimetask=new timetask();  
     private int hh,mm,ss;  
     private JLabel label1 = new JLabel();
-   
+
     private int width, height;
     private Handler handler;
     private int canvasWidth;//BEcause of the menu bar, the canvas is not the same size as the windowns
@@ -130,7 +131,7 @@ public class GameDisplay extends Thread{
         pnlControls.setPreferredSize(new Dimension(280, height));
         pnlControls.setMaximumSize(new Dimension(280, height));
         pnlControls.setMinimumSize(new Dimension(280, height));
-        
+     
         JPanel pnlPlayer = new JPanel();
         JPanel pnlPlayerData = new JPanel();
         
