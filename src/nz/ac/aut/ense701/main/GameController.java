@@ -58,7 +58,7 @@ public class GameController {
     private int level;
     private int difficulty;
     private Set<GameEventListener> eventListeners;
-
+    private Launcher l = new Launcher();
     private Handler handler;
 
     private final double MIN_REQUIRED_CATCH = 0.8;
@@ -642,7 +642,7 @@ public class GameController {
      * @return player name
      */
     public String getPlayerName() {
-        return player.getName();
+        return l.getuserName();
     }
 
     /**

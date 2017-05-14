@@ -48,7 +48,8 @@ public class GameDisplay {
     private JLabel txtPlayerName;
     private JLabel txtPredatorsLeft;
     private Canvas canvas;//game is draw here
-
+    private JLabel timeCount;
+    
     private int width, height;
     private Handler handler;
     private int canvasWidth;//BEcause of the menu bar, the canvas is not the same size as the windowns
@@ -98,7 +99,7 @@ public class GameDisplay {
         txtPlayerName = new JLabel();
         JLabel lblPlayerStamina = new JLabel();
         progPlayerStamina = new JProgressBar();
-
+        
         JLabel lblBackpackWeight = new JLabel();
         progBackpackWeight = new JProgressBar();
         JLabel lblBackpackSize = new JLabel();
@@ -108,7 +109,8 @@ public class GameDisplay {
         lblKiwisCounted = new JLabel();
         txtKiwisCounted = new JLabel();
         txtPredatorsLeft = new JLabel();
-
+        timeCount = new JLabel();
+        
         JPanel pnlInventory = new JPanel();
         JScrollPane scrlInventory = new JScrollPane();
         listInventory = new JList();
@@ -228,7 +230,16 @@ public class GameDisplay {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtPredatorsLeft, gridBagConstraints);
-
+        
+        //add time function
+        
+        timeCount.setText("Time:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(timeCount, gridBagConstraints);
+        
         pnlPlayer.add(pnlPlayerData, BorderLayout.WEST);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
