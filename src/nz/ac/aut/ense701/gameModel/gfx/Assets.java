@@ -119,7 +119,7 @@ public class Assets {
         //Food
         images.put("Apple", apple);
         images.put("MuesliBar", muesliBar);
-        images.put("OrangeJuice", orangeJuice);
+        images.put("Orange Juice", orangeJuice);
         images.put("Sandwich", sandwich);
         
         //tools
