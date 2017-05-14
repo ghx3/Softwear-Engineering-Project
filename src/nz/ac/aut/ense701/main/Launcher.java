@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import nz.ac.aut.ense701.gui.GameDisplay;
+
 /**
  *
  * @author Everybody's
@@ -36,7 +38,7 @@ public class Launcher {
 		Game game = new Game("Title", 800, 640);
 
 		game.start();
-		
+		new GameDisplay();
 	}
 	 public String getuserName(){
     	return input.getText();

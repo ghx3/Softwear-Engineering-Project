@@ -12,6 +12,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +33,7 @@ import nz.ac.aut.ense701.main.Handler;
  *
  * @author Everybody's
  */
-public class GameDisplay {
+public class GameDisplay extends Thread{
 
     // Variables declaration - Menu                    
     private JButton btnCollect;
@@ -48,8 +51,15 @@ public class GameDisplay {
     private JLabel txtPlayerName;
     private JLabel txtPredatorsLeft;
     private Canvas canvas;//game is draw here
-    private JLabel timeCount;
     
+    private JLabel timeCount;
+    private Timer timer=new Timer();  
+    private JPanel time_panel=new JPanel();  
+    private boolean is_pause=false;  
+    private timetask mytimetask=new timetask();  
+    private int hh,mm,ss;  
+    private JLabel label1 = new JLabel();
+   
     private int width, height;
     private Handler handler;
     private int canvasWidth;//BEcause of the menu bar, the canvas is not the same size as the windowns
@@ -61,6 +71,34 @@ public class GameDisplay {
         this.handler = handler;
         this.canvasWidth = width - 310;
         this.canvasHeight = height;
+    }
+    
+    public GameDisplay(){
+    	time_panel.setBounds(0, 0, 10, 20);  
+    	
+    
+    	timer.scheduleAtFixedRate(mytimetask, 0, 1000);  
+    }
+    private int count_time=0;  
+    private String date = "00:00:00";  
+    class timetask extends TimerTask{
+    @Override  
+    public void run() {  
+        // TODO Auto-generated method stub  
+        if(!is_pause){  
+            count_time++;  
+            hh=count_time/3600;  
+            mm=(count_time%3600)/60;  
+            ss=count_time%60;  
+            //System.out.println(count_time);  
+            date=hh+":"+mm+":"+ss;  
+            label1.setText(date);  
+        }  
+    }  
+    }
+    public String toString(){
+		return date;
+    	
     }
 
     public JPanel initComponents() {
@@ -92,9 +130,10 @@ public class GameDisplay {
         pnlControls.setPreferredSize(new Dimension(280, height));
         pnlControls.setMaximumSize(new Dimension(280, height));
         pnlControls.setMinimumSize(new Dimension(280, height));
-
+        
         JPanel pnlPlayer = new JPanel();
         JPanel pnlPlayerData = new JPanel();
+        
         JLabel lblPlayerName = new JLabel();
         txtPlayerName = new JLabel();
         JLabel lblPlayerStamina = new JLabel();
@@ -239,6 +278,14 @@ public class GameDisplay {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(timeCount, gridBagConstraints);
+        
+        label1.setText(date);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(label1, gridBagConstraints);
+        
         
         pnlPlayer.add(pnlPlayerData, BorderLayout.WEST);
 
