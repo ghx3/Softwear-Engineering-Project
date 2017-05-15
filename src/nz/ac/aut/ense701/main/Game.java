@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
-import nz.ac.aut.ense701.gameModel.Utils.GameDifficulty;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
 
@@ -24,7 +23,6 @@ public class Game implements Runnable {
     private Graphics g;
     private boolean running = false;
     public static GameState state;
-    public static GameDifficulty gameDifficulty;
 
     public Game(String title, int width, int height) {
         this.width = width;
@@ -62,19 +60,7 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             //Clean screen
             g.clearRect(0, 0, width, height);
-            
-            switch (gameDifficulty) {
-                case EASY:
-                    gameController.setDifficulty(0);
-                    break;
-                case MEDIUM:
-                    gameController.setDifficulty(1);
-                    break;
-                case HARD:
-                    gameController.setDifficulty(2);
-                    break;
-            }
-            
+
             gameController.render(g);
 
             bs.show();

@@ -18,13 +18,10 @@ import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import nz.ac.aut.ense701.gameModel.Utils.GameDifficulty;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
 import nz.ac.aut.ense701.main.Game;
-import nz.ac.aut.ense701.main.GameController;
 
 /**
  * This class draws the background image
@@ -87,30 +84,11 @@ public class MainMenu extends JPanel {
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                //frame.getContentPane().remove(menuPane);
 
-                String[] difficulties = { "Easy", "Medium", "Hard"};
-                String input = (String) JOptionPane.showInputDialog(null, "Choose your difficulty",
-                    "Please Select Difficulty", JOptionPane.QUESTION_MESSAGE, null, 
-                    difficulties, // Array of choices
-                    difficulties[0]); //initial choice
-                
-                if(input.equals("Easy")) {
-                    Game.gameDifficulty = GameDifficulty.EASY;
-                    Game.state = GameState.PLAYING;
-                    menuPane.setVisible(false);
-                }
-                else if(input.equals("Medium")) {
-                    Game.gameDifficulty = GameDifficulty.MEDIUM;
-                    Game.state = GameState.PLAYING;
-                    menuPane.setVisible(false);
-                }
-                else if(input.equals("Hard")) {
-                    Game.gameDifficulty = GameDifficulty.HARD;
-                    Game.state = GameState.PLAYING;
-                    menuPane.setVisible(false);
-                }
+                //frame.getContentPane().remove(menuPane);
+                Game.state = GameState.PLAYING;
+                menuPane.setVisible(false);
+
             }
         }
         );

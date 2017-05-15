@@ -56,7 +56,6 @@ public class GameController {
     private int totalKiwis;
     private int predatorsTrapped;
     private int level;
-    private int difficulty;
     private Set<GameEventListener> eventListeners;
     private Launcher l = new Launcher();
     private Handler handler;
@@ -101,57 +100,22 @@ public class GameController {
         createNewGame();
     }
 
-    public void setDifficulty(int diff) {
-        difficulty = diff;
-    }
-    
     /**
      * Starts a new game. At this stage data is being read from a text file
      */
     public void createNewGame() {
         WorldCreator world = null;
-        switch(difficulty) {
-            case(0):
-                switch(level) {
-                    case(1):
-                        world = new WorldCreator(handler, "maps/1E.txt");
-                        break;
-                    case(2):
-                        world = new WorldCreator(handler, "maps/2E.txt");
-                        break;
-                    case(3):
-                        world = new WorldCreator(handler, "maps/3E.txt");
-                        break;
-                }
-                break;
+        switch(level) {
             case(1):
-                switch(level) {
-                    case(1):
-                        world = new WorldCreator(handler, "maps/1M.txt");
-                        break;
-                    case(2):
-                        world = new WorldCreator(handler, "maps/2M.txt");
-                        break;
-                    case(3):
-                        world = new WorldCreator(handler, "maps/3M.txt");
-                        break;
-                }
+                world = new WorldCreator(handler, "maps/1M.txt");
                 break;
             case(2):
-                switch(level) {
-                    case(1):
-                        world = new WorldCreator(handler, "maps/1H.txt");
-                        break;
-                    case(2):
-                        world = new WorldCreator(handler, "maps/2H.txt");
-                        break;
-                    case(3):
-                        world = new WorldCreator(handler, "maps/3H.txt");
-                        break;
-                }
+                world = new WorldCreator(handler, "maps/2M.txt");
+                break;
+            case(3):
+                world = new WorldCreator(handler, "maps/3M.txt");
                 break;
         }
-        
                 
         handler.setIsland(world.getIsland());
 
