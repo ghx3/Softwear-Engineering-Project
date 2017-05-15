@@ -57,7 +57,7 @@ public class GameController {
     private int predatorsTrapped;
     private int level;
     private Set<GameEventListener> eventListeners;
-    private Launcher l = new Launcher();
+
     private Handler handler;
 
     private final double MIN_REQUIRED_CATCH = 0.8;
@@ -606,7 +606,7 @@ public class GameController {
      * @return player name
      */
     public String getPlayerName() {
-        return l.getuserName();
+        return player.getName();
     }
 
     /**
