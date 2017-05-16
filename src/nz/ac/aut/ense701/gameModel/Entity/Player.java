@@ -87,7 +87,7 @@ public class Player extends Occupant {
     public void setPosition(Position pos){
         this.position = pos;
     }
-
+    // reated in case we use z,y cordinates. Not in use at the moment
     public void setXY() {
         xMove = position.getRow() * Game.TILE_WIDTH;
         yMove = position.getColumn() * Game.TILE_HEIGTH;

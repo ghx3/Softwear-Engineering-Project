@@ -11,8 +11,8 @@ import nz.ac.aut.ense701.gameModel.gfx.Assets;
 
 public class Game implements Runnable {
 
-    public static int TILE_HEIGTH ;// this set the tiles width size to be print within the canvas
-    public static int TILE_WIDTH ;// this set the tiles height size to be print within the canvas
+    public static int TILE_HEIGTH;// this set the tiles width size to be print within the canvas
+    public static int TILE_WIDTH;// this set the tiles height size to be print within the canvas
     private int width, height;
     public String title;
 
@@ -38,8 +38,8 @@ public class Game implements Runnable {
         handler = new Handler(this);
         gameController = new GameController(handler);
         display = new Display(title, width, height, handler);
-        setTilesSize();
-        gameController.getPlayer().setXY();
+        //setTilesSize();
+        //gameController.getPlayer().setXY();
         state = GameState.MENU;
 
     }
@@ -62,19 +62,7 @@ public class Game implements Runnable {
             g = bs.getDrawGraphics();
             //Clean screen
             g.clearRect(0, 0, width, height);
-            
-            switch (gameDifficulty) {
-                case EASY:
-                    gameController.setDifficulty(0);
-                    break;
-                case MEDIUM:
-                    gameController.setDifficulty(1);
-                    break;
-                case HARD:
-                    gameController.setDifficulty(2);
-                    break;
-            }
-            
+
             gameController.render(g);
 
             bs.show();

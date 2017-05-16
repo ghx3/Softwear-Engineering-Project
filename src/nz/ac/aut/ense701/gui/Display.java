@@ -61,9 +61,10 @@ public class Display implements GameEventListener, KeyListener {
 
         setAsGameListener();
 
-        mainmenu = new MainMenu( width, height);
+        mainmenu = new MainMenu(handler, width, height);
         gameDisplay = new GameDisplay(handler, width, height);
-
+        handler.setDisplay(this);
+        
         frame.add(mainmenu, BorderLayout.CENTER);
         frame.add(gameDisplay.initComponents(), BorderLayout.CENTER);
 
@@ -71,6 +72,7 @@ public class Display implements GameEventListener, KeyListener {
         frame.setVisible(true);
         frame.addKeyListener(this);
         frame.setFocusable(true);
+        
 
     }
 
@@ -111,19 +113,23 @@ public class Display implements GameEventListener, KeyListener {
     public Canvas getCanvas() {
         return gameDisplay.getCanvas();
     }
-    
-     public int getCanvasWidth() {
+
+    public int getCanvasWidth() {
         return gameDisplay.getCanvasWidth();
     }
+
     public int getCanvasHeight() {
         return gameDisplay.getCanvasHeight();
     }
-       
 
     public JFrame getFrame() {
         return frame;
     }
 
+    public GameDisplay getGameDisplay() {
+        return gameDisplay;
+    }    
+    
     @Override
     public void keyTyped(KeyEvent e) {
 

@@ -24,6 +24,7 @@ import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
 import nz.ac.aut.ense701.gameModel.Entity.Tool;
+import nz.ac.aut.ense701.gameModel.Entity.UserInfo;
 import nz.ac.aut.ense701.gameModel.Map.GridSquare;
 import nz.ac.aut.ense701.gameModel.Map.WorldCreator;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
@@ -58,6 +59,7 @@ public class GameController {
     private int level;
     private int difficulty;
     private Set<GameEventListener> eventListeners;
+    public UserInfo user;
 
     private Handler handler;
 
@@ -97,8 +99,10 @@ public class GameController {
     public GameController(Handler handler) {
         this.handler = handler;
         eventListeners = new HashSet<GameEventListener>();
+        difficulty = 0;
         level = 1;
-        createNewGame();
+        user = new UserInfo();
+        //createNewGame();
     }
 
     public void setDifficulty(int diff) {

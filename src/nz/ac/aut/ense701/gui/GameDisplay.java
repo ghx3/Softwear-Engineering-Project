@@ -78,7 +78,7 @@ public class GameDisplay {
         pnlContent.setLayout(new BorderLayout(10, 0));
         pnlContent.add(canvas, BorderLayout.WEST);
         pnlContent.add(pnlControls, BorderLayout.EAST);
-        update();
+        //update();
 
         return pnlContent;
 
@@ -404,7 +404,7 @@ public class GameDisplay {
         canvas.setFocusable(true);
         // update player information
         int[] playerValues = handler.getGameController().getPlayerValues();
-        txtPlayerName.setText(handler.getGameController().getPlayerName());
+        txtPlayerName.setText(handler.getGameController().user.getName());
         progPlayerStamina.setMaximum(playerValues[GameController.MAXSTAMINA_INDEX]);
         progPlayerStamina.setValue(playerValues[GameController.STAMINA_INDEX]);
         progBackpackWeight.setMaximum(playerValues[GameController.MAXWEIGHT_INDEX]);
@@ -442,9 +442,6 @@ public class GameDisplay {
     public int getCanvasHeight() {
         return canvasHeight;
     }
-
-    
-    
 
     private void btnCollectActionPerformed(ActionEvent evt) {
         Object obj = listObjects.getSelectedValue();

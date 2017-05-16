@@ -7,6 +7,7 @@ package nz.ac.aut.ense701.main;
 
 import nz.ac.aut.ense701.gameModel.Map.Island;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
+import nz.ac.aut.ense701.gui.Display;
 
 /**
  *
@@ -16,6 +17,17 @@ public class Handler {
 
     private Game game;
     private Island island;
+    private Display display;
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(Display display) {
+        this.display = display;
+    }
+    
+    
 
     public Handler(Game game) {
         this.game = game;
