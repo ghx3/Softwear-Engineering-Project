@@ -102,30 +102,32 @@ public class MainMenu extends JPanel {
                         "Please Select Difficulty", JOptionPane.QUESTION_MESSAGE, null,
                         difficulties, // Array of choices
                         difficulties[0]); //initial choice
+                if(input != null) {
+                    if (input.equals("Easy")) {
+                        diff = 0;
+                    } else if (input.equals("Medium")) {
+                        diff = 1;
+                    } else if (input.equals("Hard")) {
+                        diff = 2;
+                    }
 
-                if (input.equals("Easy")) {
-                    diff = 0;
-                } else if (input.equals("Medium")) {
-                    diff = 1;
-                } else if (input.equals("Hard")) {
-                    diff = 2;
+                    //Creates new game based on difficulty level
+                    handler.getGameController().setDifficulty(diff);
+                    handler.getGameController().createNewGame();
+
+
+                    handler.getGameController().user.setPlayerName(GetPlayerName());
+
+                    handler.getDisplay().getGameDisplay().update();
+                    //Updates size of the tiels to fit on the canvas;
+                    handler.getGame().setTilesSize();
+                    //handler.getGameController().getPlayer().setXY(); // reated in case we use z,y cordinates
+
+                    Game.state = GameState.PLAYING;
+                    menuPane.setVisible(false);
+                } else {
+                    Game.state = GameState.MENU;
                 }
-
-                //Creates new game based on difficulty level
-                handler.getGameController().setDifficulty(diff);
-                handler.getGameController().createNewGame();
-                
-                
-                handler.getGameController().user.setPlayerName(GetPlayerName());
-               
-                handler.getDisplay().getGameDisplay().update();
-                //Updates size of the tiels to fit on the canvas;
-                handler.getGame().setTilesSize();
-                //handler.getGameController().getPlayer().setXY(); // reated in case we use z,y cordinates
-
-                Game.state = GameState.PLAYING;
-                menuPane.setVisible(false);
-                
                 
             }
         }
