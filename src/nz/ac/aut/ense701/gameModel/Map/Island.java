@@ -54,13 +54,11 @@ public class Island {
                 if (!square.isVisible() && !hasPlayer(position)) {
                     
                     if(Game.gameDifficulty == GameDifficulty.HARD) {
-                        Color color = g.getColor();
                         g.setColor(new Color(0, 0, 0, 255));
                         g.fillRect(position.getRow() * Game.TILE_WIDTH,
                         position.getColumn() * Game.TILE_HEIGTH,
                         Game.TILE_WIDTH, Game.TILE_HEIGTH);
                     } else {
-                        Color color = g.getColor();
                         g.setColor(new Color(100, 100, 100, 150));
                         g.fillRect(position.getRow() * Game.TILE_WIDTH,
                         position.getColumn() * Game.TILE_HEIGTH,
