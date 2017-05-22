@@ -104,10 +104,13 @@ public class MainMenu extends JPanel {
                         difficulties[0]); //initial choice
                 if(input != null) {
                     if (input.equals("Easy")) {
+                        Game.gameDifficulty = GameDifficulty.EASY;
                         diff = 0;
                     } else if (input.equals("Medium")) {
+                        Game.gameDifficulty = GameDifficulty.MEDIUM;
                         diff = 1;
                     } else if (input.equals("Hard")) {
+                        Game.gameDifficulty = GameDifficulty.HARD;
                         diff = 2;
                     }
 

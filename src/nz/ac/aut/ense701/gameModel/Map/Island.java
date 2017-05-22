@@ -7,6 +7,7 @@ import nz.ac.aut.ense701.gameModel.Entity.Occupant;
 import nz.ac.aut.ense701.gameModel.Entity.Player;
 import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
+import nz.ac.aut.ense701.gameModel.Utils.GameDifficulty;
 import nz.ac.aut.ense701.main.Game;
 
 /**
@@ -51,12 +52,20 @@ public class Island {
                 GridSquare square = getGridSquare(position);
 
                 if (!square.isVisible() && !hasPlayer(position)) {
-                    Color color = g.getColor();
-                    g.setColor(new Color(100, 100, 100, 150));
-                    g.fillRect(position.getRow() * Game.TILE_WIDTH,
-                            position.getColumn() * Game.TILE_HEIGTH,
-                            Game.TILE_WIDTH, Game.TILE_HEIGTH);
-
+                    
+                    if(Game.gameDifficulty == GameDifficulty.HARD) {
+                        Color color = g.getColor();
+                        g.setColor(new Color(0, 0, 0, 255));
+                        g.fillRect(position.getRow() * Game.TILE_WIDTH,
+                        position.getColumn() * Game.TILE_HEIGTH,
+                        Game.TILE_WIDTH, Game.TILE_HEIGTH);
+                    } else {
+                        Color color = g.getColor();
+                        g.setColor(new Color(100, 100, 100, 150));
+                        g.fillRect(position.getRow() * Game.TILE_WIDTH,
+                        position.getColumn() * Game.TILE_HEIGTH,
+                        Game.TILE_WIDTH, Game.TILE_HEIGTH);
+                    }
                 } else {
 
                     Occupant[] occupants = getOccupants(position);
