@@ -69,6 +69,9 @@ public class GameController {
     private String loseMessage = "";
     private String playerMessage = "";
     
+    public long startTime;
+    public long finishTime;
+    
     //for test purpose
      public GameController(Handler handler,WorldCreator world) {
         this.handler = handler;
@@ -113,6 +116,7 @@ public class GameController {
      * Starts a new game. At this stage data is being read from a text file
      */
     public void createNewGame() {
+        startTime = System.currentTimeMillis();
         WorldCreator world = null;
         switch(difficulty) {
             case(0):
@@ -351,16 +355,45 @@ public class GameController {
             message = "You win! You have done an excellent job and trapped all the predators.";
             this.setWinMessage(message);
             level++;
+            getRank(finishTime);
         } else if (kiwiCount == totalKiwis) {
             if (predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH) {
                 state = GameState.WON;
                 message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
                 this.setWinMessage(message);
                 level++;
+                getRank(finishTime);
             }
         }
         // notify listeners about changes
         notifyGameEventListeners();
+    }
+    
+    public void getRank(long finishTime) {
+        double rankTime = finishTime / 1000 / 60;
+        String rank;
+        if(rankTime < 1) {
+            rank = "S";
+        }
+        else if(rankTime < 2) {
+            rank = "A";
+        }
+        else if(rankTime < 3) {
+            rank = "B";
+        }
+        else if(rankTime < 4) {
+            rank = "C";
+        }
+        else {
+            rank = "D";
+        }
+        saveScore(user.getName(), rank);
+    }
+    
+    public void saveScore(String name, String rank) {
+        
+        
+        
     }
 
     /**

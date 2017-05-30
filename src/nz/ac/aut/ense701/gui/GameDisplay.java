@@ -39,6 +39,7 @@ public class GameDisplay {
     private JButton btnUse;
     private JLabel lblKiwisCounted;
     private JLabel lblPredators;
+    private JLabel time;
     private JList listInventory;
     private JList listObjects;
     private JProgressBar progBackpackSize;
@@ -108,6 +109,8 @@ public class GameDisplay {
         lblKiwisCounted = new JLabel();
         txtKiwisCounted = new JLabel();
         txtPredatorsLeft = new JLabel();
+        
+        time = new JLabel();
 
         JPanel pnlInventory = new JPanel();
         JScrollPane scrlInventory = new JScrollPane();
@@ -229,6 +232,13 @@ public class GameDisplay {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         pnlPlayerData.add(txtPredatorsLeft, gridBagConstraints);
 
+        time.setText("Time:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        pnlPlayerData.add(time, gridBagConstraints);
+        
         pnlPlayer.add(pnlPlayerData, BorderLayout.WEST);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -416,6 +426,11 @@ public class GameDisplay {
         txtKiwisCounted.setText(Integer.toString(handler.getGameController().getKiwiCount()));
         txtPredatorsLeft.setText(Integer.toString(handler.getGameController().getPredatorsRemaining()));
 
+        //Time
+        long timeElapsed = System.currentTimeMillis() - handler.getGameController().startTime;
+        handler.getGameController().finishTime = timeElapsed;
+        time.setText(getTime(timeElapsed));
+        
         // update inventory list
         listInventory.setListData(handler.getGameController().getPlayerInventory());
         listInventory.clearSelection();
@@ -429,6 +444,17 @@ public class GameDisplay {
         listObjects.setToolTipText(null);
         btnCollect.setEnabled(false);
         btnCount.setEnabled(false);
+    }
+    
+    public String getTime(long timeElapsed) {
+  
+        long seconds = timeElapsed / 1000;
+        long seconds2 = seconds % 60;
+        long minutes = (seconds-seconds2)/60;
+        
+        String timeElapsedString = "Time: "+minutes +" : "+ seconds2;
+         
+        return timeElapsedString;
     }
 
     public Canvas getCanvas() {
