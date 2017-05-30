@@ -352,24 +352,24 @@ public class GameController {
             this.setLoseMessage(message);
         } else if (predatorsTrapped == totalPredators) {
             state = GameState.WON;
-            message = "You win! You have done an excellent job and trapped all the predators.";
+            String rank = getRank(finishTime);
+            message = "You win! You have done an excellent job and trapped all the predators. You achieved Rank "+rank;
             this.setWinMessage(message);
             level++;
-            getRank(finishTime);
         } else if (kiwiCount == totalKiwis) {
             if (predatorsTrapped >= totalPredators * MIN_REQUIRED_CATCH) {
                 state = GameState.WON;
-                message = "You win! You have counted all the kiwi and trapped at least 80% of the predators.";
+                String rank = getRank(finishTime);
+                message = "You win! You have counted all the kiwi and trapped at least 80% of the predators. You achieved Rank "+rank;
                 this.setWinMessage(message);
                 level++;
-                getRank(finishTime);
             }
         }
         // notify listeners about changes
         notifyGameEventListeners();
     }
     
-    public void getRank(long finishTime) {
+    public String getRank(long finishTime) {
         double rankTime = finishTime / 1000 / 60;
         String rank;
         if(rankTime < 1) {
@@ -388,6 +388,7 @@ public class GameController {
             rank = "D";
         }
         saveScore(user.getName(), rank);
+        return rank;
     }
     
     public void saveScore(String name, String rank) {
