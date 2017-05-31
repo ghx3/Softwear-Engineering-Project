@@ -1,15 +1,8 @@
 package nz.ac.aut.ense701.main;
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashSet;
-import java.util.Locale;
-import java.util.Scanner;
 import java.util.Set;
-import nz.ac.aut.ense701.gameModel.Entity.Fauna;
 import nz.ac.aut.ense701.gameModel.Entity.Food;
 import nz.ac.aut.ense701.gameModel.Utils.GameEventListener;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
@@ -21,15 +14,11 @@ import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 import nz.ac.aut.ense701.gameModel.Entity.Occupant;
 import nz.ac.aut.ense701.gameModel.Entity.Player;
 import nz.ac.aut.ense701.gameModel.Map.Position;
-import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
 import nz.ac.aut.ense701.gameModel.Entity.Tool;
 import nz.ac.aut.ense701.gameModel.Entity.UserInfo;
-import nz.ac.aut.ense701.gameModel.Map.GridSquare;
 import nz.ac.aut.ense701.gameModel.Map.WorldCreator;
 import nz.ac.aut.ense701.gameModel.Tile.Tile;
-import static nz.ac.aut.ense701.main.Game.TILE_HEIGTH;
-import static nz.ac.aut.ense701.main.Game.TILE_WIDTH;
 
 /**
  * This is the class that knows the Kiwi Island game rules and state and

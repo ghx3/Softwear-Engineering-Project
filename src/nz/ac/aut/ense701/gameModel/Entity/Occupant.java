@@ -2,7 +2,6 @@ package nz.ac.aut.ense701.gameModel.Entity;
 
 import java.awt.Graphics;
 import nz.ac.aut.ense701.gameModel.Map.Position;
-import nz.ac.aut.ense701.gameModel.Tile.Tile;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
 import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.Handler;

@@ -1,11 +1,6 @@
 package nz.ac.aut.ense701.gameModel.Entity;
 
-import java.awt.Graphics;
-import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_HEIGHT;
-import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_WIDTH;
 import nz.ac.aut.ense701.gameModel.Map.Position;
-import nz.ac.aut.ense701.gameModel.Tile.Tile;
-import nz.ac.aut.ense701.gameModel.gfx.Assets;
 import nz.ac.aut.ense701.main.Handler;
 
 /**

@@ -3,16 +3,12 @@ package nz.ac.aut.ense701.gameModel.Entity;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.math.BigDecimal;
 import nz.ac.aut.ense701.gameModel.Map.Position;
 import nz.ac.aut.ense701.gameModel.Map.Terrain;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.HashSet;
-import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_HEIGHT;
-import static nz.ac.aut.ense701.gameModel.Entity.Occupant.DEFAULT_OCCUPANT_WIDTH;
-import nz.ac.aut.ense701.gameModel.Tile.Tile;
 import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
 
 import nz.ac.aut.ense701.gameModel.gfx.Assets;

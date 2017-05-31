@@ -1,5 +1,4 @@
 package nz.ac.aut.ense701.gameModel.Tile;
-import java.awt.image.BufferedImage;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
 
 /**

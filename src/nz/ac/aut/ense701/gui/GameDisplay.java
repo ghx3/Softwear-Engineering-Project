@@ -14,15 +14,12 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.event.ListSelectionEvent;
-import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.main.GameController;
 import nz.ac.aut.ense701.main.Handler;
 

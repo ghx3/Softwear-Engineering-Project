@@ -6,7 +6,6 @@
 package nz.ac.aut.ense701.main;
 
 import nz.ac.aut.ense701.gameModel.Map.Island;
-import nz.ac.aut.ense701.gameModel.Tile.Tile;
 import nz.ac.aut.ense701.gui.Display;
 
 /**

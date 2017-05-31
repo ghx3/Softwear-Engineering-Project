@@ -18,8 +18,6 @@ import nz.ac.aut.ense701.gameModel.Entity.Occupant;
 import nz.ac.aut.ense701.gameModel.Entity.Player;
 import nz.ac.aut.ense701.gameModel.Entity.Predator;
 import nz.ac.aut.ense701.gameModel.Entity.Tool;
-import nz.ac.aut.ense701.gameModel.Tile.Tile;
-import nz.ac.aut.ense701.main.Game;
 import nz.ac.aut.ense701.main.Handler;
 
 /**

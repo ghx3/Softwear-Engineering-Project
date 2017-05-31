@@ -2,33 +2,12 @@ package nz.ac.aut.ense701.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.GridLayout;
-import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import javax.swing.BorderFactory;
-import javax.swing.GroupLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.event.ListSelectionEvent;
 import nz.ac.aut.ense701.gameModel.Utils.GameEventListener;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
-import nz.ac.aut.ense701.gameModel.Utils.MoveDirection;
-import nz.ac.aut.ense701.main.GameController;
 import nz.ac.aut.ense701.main.Handler;
 
 public class Display implements GameEventListener, KeyListener {

@@ -1,8 +1,6 @@
 package nz.ac.aut.ense701.gameModel.gfx;
 
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
 
 /**
  *

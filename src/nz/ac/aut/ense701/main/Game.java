@@ -1,10 +1,8 @@
 package nz.ac.aut.ense701.main;
 
 import nz.ac.aut.ense701.gui.Display;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
 import nz.ac.aut.ense701.gameModel.Utils.GameDifficulty;
 import nz.ac.aut.ense701.gameModel.Utils.GameState;
 import nz.ac.aut.ense701.gameModel.gfx.Assets;
