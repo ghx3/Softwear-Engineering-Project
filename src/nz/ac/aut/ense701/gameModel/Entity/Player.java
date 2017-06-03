@@ -34,11 +34,11 @@ public class Player extends Occupant {
     private Set<Item> backpack;
     private final double maxBackpackWeight;
     private final double maxBackpackSize;
-
+    
     private MoveDirection direction;
     private float speed = 5.0f;
     private float xMove, yMove;
-
+    private int move = 0;
     public void setDirection(MoveDirection direction) {
         this.direction = direction;
     }
@@ -91,31 +91,33 @@ public class Player extends Occupant {
 
     public void move(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_W) {
+        if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
 
             setDirection(MoveDirection.NORTH);
 
             handler.getGameController().playerMove(MoveDirection.NORTH);
+            move++;
 
         }
-        if (e.getKeyCode() == KeyEvent.VK_S) {
+        if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
 
             setDirection(MoveDirection.SOUTH);
 
             handler.getGameController().playerMove(MoveDirection.SOUTH);
+            move++;
 
         }
-        if (e.getKeyCode() == KeyEvent.VK_A) {
+        if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
             setDirection(MoveDirection.WEST);
             handler.getGameController().playerMove(MoveDirection.WEST);
-
+            move++;
         }
-        if (e.getKeyCode() == KeyEvent.VK_D) {
+        if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
             setDirection(MoveDirection.EAST);
             handler.getGameController().playerMove(MoveDirection.EAST);
-
+            move++;
         }
-
+  
         /*
         boolean movedTiles = false;
         float currentX =  (xMove / Game.TILE_WIDTH);
@@ -178,6 +180,10 @@ public class Player extends Occupant {
      */
     public boolean isAlive() {
         return this.alive;
+    }
+   
+    public int getMove(){
+    	return move;
     }
 
     /**

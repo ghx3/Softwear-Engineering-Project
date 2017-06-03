@@ -1,5 +1,7 @@
 /*
  * To change this license header, choose License Headers in Project Properties.
+/*
+ * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -139,7 +141,7 @@ public class MainMenu extends JPanel {
         highscoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+            	
             }
         }
         );
@@ -162,7 +164,7 @@ public class MainMenu extends JPanel {
         JTextField input = new JTextField(12);
         p1.setMessage(null);
         p1.setLayout(new FlowLayout());
-        p1.setPreferredSize(new Dimension(200, 100));
+        p1.setPreferredSize(new Dimension(200, 200));
         p1.add(userName, 0);
         p1.add(input, 1);
         JDialog d = p1.createDialog(p1, "Enter new name!");
@@ -182,3 +184,4 @@ public class MainMenu extends JPanel {
     }
 
 }
+ 
