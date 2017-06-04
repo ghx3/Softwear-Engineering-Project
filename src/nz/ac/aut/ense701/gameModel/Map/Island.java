@@ -35,7 +35,10 @@ public class Island {
         this.previousPlayerPos = null;
         initialiseIsland();
     }
-
+    /**
+     * renders map and its occupants to the canvas
+     * @param g 
+     */
     public void render(Graphics g) {
 
         for (int y = 0; y < this.getNumColumns(); y++) {

@@ -88,7 +88,10 @@ public class Player extends Occupant {
         xMove = position.getRow() * Game.TILE_WIDTH;
         yMove = position.getColumn() * Game.TILE_HEIGTH;
     }
-
+    /**
+     * Move player to next position
+     * @param e 
+     */
     public void move(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
@@ -118,54 +121,7 @@ public class Player extends Occupant {
             move++;
         }
   
-        /*
-        boolean movedTiles = false;
-        float currentX =  (xMove / Game.TILE_WIDTH);
-        float currentY =  (yMove / Game.TILE_HEIGTH);
-
-        int cX = Integer.parseInt(Double.toString(currentX).substring(0, 1));
-        int cY = Integer.parseInt(Double.toString(currentY).substring(0, 1));
-        
-        if ((cX != position.getRow()) || (cY != position.getColumn())) {
-            System.out.println("Current POSX = " + position.getRow() + "  Current POSY = " + position.getColumn());
-            System.out.println("Current X = " +currentX + "  Current Y = " +currentY);
-            System.out.println("cx = " + cX + "  cY = " + cY);
-            System.out.println("xMove = " + xMove + "  yMove = " + yMove);
-            
-            movedTiles = true;
-        }
-
-        if (e.getKeyCode() == KeyEvent.VK_W) {
-            yMove -= speed;
-            setDirection(MoveDirection.NORTH);
-            if (movedTiles) {
-                handler.getGameController().playerMove(MoveDirection.NORTH);
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_S) {
-            yMove += speed;
-            setDirection(MoveDirection.SOUTH);
-            if (movedTiles) {
-                handler.getGameController().playerMove(MoveDirection.SOUTH);
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_A) {
-            xMove -= speed;
-            setDirection(MoveDirection.WEST);
-            if (movedTiles) {
-                handler.getGameController().playerMove(MoveDirection.WEST);
-            }
-        }
-        if (e.getKeyCode() == KeyEvent.VK_D) {
-            xMove += speed;
-            setDirection(MoveDirection.EAST);
-            if (movedTiles) {
-                handler.getGameController().playerMove(MoveDirection.EAST);
-            }
-        }
-        System.out.println("Updated POSX = " + position.getRow() + "  Current POSY = " + position.getColumn());
-        System.out.println();
-         */
+       
     }
 
     /**

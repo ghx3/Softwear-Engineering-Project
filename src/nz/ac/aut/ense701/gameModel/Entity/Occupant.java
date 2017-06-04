@@ -104,6 +104,10 @@ public abstract class Occupant
      */
     public abstract String getStringRepresentation();
 
+    /**
+     * Gets image for the Occupant by its name
+     * @param g 
+     */
     public void render(Graphics g){
         int xOffset= (Game.TILE_WIDTH - DEFAULT_OCCUPANT_WIDTH)/2;
         int yOffset = (Game.TILE_HEIGTH - DEFAULT_OCCUPANT_HEIGHT)/2; 
